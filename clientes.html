@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClienteViz</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#1a56db;--accent-light:#e8f0fe;--accent-text:#1a56db;
+  --bg:#f4f6fb;--surface:#fff;--surface2:#f0f2f8;--border:#e2e6f0;
+  --text:#111827;--text2:#6b7280;--text3:#9ca3af;
+  --shadow:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.08);
+  --r:10px;--rl:16px;
+  --header-h:56px;--vendor-h:44px;--tab-h:48px;
+}
+[data-theme="dark"]{
+  --bg:#0d0f17;--surface:#151824;--surface2:#1e2130;--border:#2a2d3e;
+  --text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;
+  --shadow:0 1px 3px rgba(0,0,0,.4);--shadow-md:0 4px 20px rgba(0,0,0,.4);
+  --accent-light:#1a2550;--accent-text:#60a5fa;
+}
+[data-color="teal"]{--accent:#0d9488;--accent-light:#e0fdf4;--accent-text:#0d9488}
+[data-color="teal"][data-theme="dark"]{--accent-light:#0d2e2a;--accent-text:#2dd4bf}
+[data-color="violet"]{--accent:#7c3aed;--accent-light:#f0ebff;--accent-text:#7c3aed}
+[data-color="violet"][data-theme="dark"]{--accent-light:#2d1f5e;--accent-text:#a78bfa}
+[data-color="rose"]{--accent:#e11d48;--accent-light:#ffe4ec;--accent-text:#e11d48}
+[data-color="rose"][data-theme="dark"]{--accent-light:#4a0d22;--accent-text:#fb7185}
+[data-color="amber"]{--accent:#d97706;--accent-light:#fef3c7;--accent-text:#d97706}
+[data-color="amber"][data-theme="dark"]{--accent-light:#3a2000;--accent-text:#fbbf24}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .2s,color .2s}
+
+/* ── HEADER ── */
+.hdr{height:var(--header-h);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200;box-shadow:var(--shadow)}
+.logo{font-size:17px;font-weight:600;letter-spacing:-.5px}.logo span{color:var(--accent)}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.cdots{display:flex;gap:5px;align-items:center}
+.cdot{width:20px;height:20px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .15s}
+.cdot:hover,.cdot.on{transform:scale(1.3);border-color:var(--text)}
+.tbtn{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:5px 9px;cursor:pointer;font-size:15px;color:var(--text2);transition:all .15s}
+.tbtn:hover{background:var(--accent-light);color:var(--accent-text)}
+
+/* ── VENDOR BAR ── */
+.vendor-bar{height:var(--vendor-h);background:var(--accent);display:none;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:var(--header-h);z-index:190}
+.vendor-bar.show{display:flex}
+.vendor-name{font-size:13px;font-weight:600;color:#fff;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vendor-meta{display:flex;gap:12px;align-items:center;flex-shrink:0}
+.vendor-chip{background:rgba(255,255,255,.2);border-radius:6px;padding:3px 10px;font-size:11px;color:#fff;font-weight:500;white-space:nowrap}
+
+/* ── TABS ── */
+.tabs-wrap{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:calc(var(--header-h) + 0px);z-index:180;transition:top .2s}
+.tabs-wrap.with-vendor{top:calc(var(--header-h) + var(--vendor-h))}
+.tabs{display:flex;padding:0 20px;gap:4px}
+.tab{padding:0 18px;height:var(--tab-h);display:flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--accent-text);border-bottom-color:var(--accent)}
+.tab-icon{font-size:16px}
+
+/* ── PANELS ── */
+.panel{display:none;padding:20px}
+.panel.on{display:block}
+
+/* ── UPLOAD ── */
+.upzone{background:var(--surface);border:2px dashed var(--border);border-radius:var(--rl);padding:36px 24px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:20px}
+.upzone:hover,.upzone.drag{border-color:var(--accent);background:var(--accent-light)}
+.upzone input{display:none}
+.up-icon{font-size:36px;margin-bottom:10px}
+.upzone h3{font-size:15px;font-weight:500;margin-bottom:5px}
+.upzone p{font-size:13px;color:var(--text2)}
+.fmts{display:flex;gap:6px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.badge{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 8px;font-size:11px;font-weight:500;color:var(--text2);font-family:'DM Mono',monospace}
+.badge.hi{background:var(--accent-light);color:var(--accent-text);border-color:var(--accent)}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;box-shadow:var(--shadow)}
+.sc-lbl{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.sc-val{font-size:20px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.sc-val.a{color:var(--accent-text)}
+
+/* ── CONTROLS ── */
+.ctrl{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;box-shadow:var(--shadow)}
+.sw{position:relative;flex:1;min-width:180px}
+.sw input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s}
+.sw input:focus{border-color:var(--accent)}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--text3);pointer-events:none}
+select,.btn{border:1px solid var(--border);border-radius:7px;padding:8px 11px;font-size:12px;font-family:inherit;background:var(--surface2);color:var(--text);cursor:pointer;outline:none;transition:all .15s}
+select:hover{border-color:var(--accent)}
+.btn{font-weight:500;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn:hover{background:var(--accent-light);color:var(--accent-text);border-color:var(--accent)}
+.btn.danger:hover{background:#fee2e2;color:#dc2626;border-color:#dc2626}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{opacity:.9;color:#fff;background:var(--accent)}
+.btn.success{background:#059669;color:#fff;border-color:#059669}
+.btn.success:hover{opacity:.9;color:#fff}
+
+/* ── TABLE ── */
+.twrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);box-shadow:var(--shadow-md);overflow:hidden}
+.tscroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead{background:var(--surface2);position:sticky;top:calc(var(--header-h) + var(--vendor-h) + var(--tab-h));z-index:10}
+.no-vendor thead{top:calc(var(--header-h) + var(--tab-h))}
+th{padding:10px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:color .15s}
+th:hover{color:var(--accent-text)}
+th .si2{opacity:.25;font-size:9px;margin-left:3px}
+th.sorted .si2{opacity:1;color:var(--accent-text)}
+td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--accent-light)}
+.v-cell{font-family:'DM Mono',monospace;font-size:11.5px;font-weight:600;color:var(--accent-text);text-align:right;max-width:100px}
+.v-hi{color:#059669!important}
+.v-z{color:var(--text3)!important}
+.s-on{display:inline-block;background:#dcfce7;color:#15803d;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700}
+.s-off{display:inline-block;background:#fee2e2;color:#dc2626;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700}
+[data-theme="dark"] .s-on{background:#14532d;color:#86efac}
+[data-theme="dark"] .s-off{background:#450a0a;color:#fca5a5}
+.nodata{text-align:center;padding:60px 24px;color:var(--text3)}
+.nodata .ni{font-size:40px;margin-bottom:12px}
+
+/* ── PAGINATION ── */
+.pgn{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--border);flex-wrap:wrap;gap:6px}
+.pg-info{font-size:12px;color:var(--text2)}
+.pg-btns{display:flex;gap:3px}
+.pb{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 9px;font-size:12px;cursor:pointer;color:var(--text2);transition:all .15s;font-family:inherit}
+.pb:hover{border-color:var(--accent);color:var(--accent-text)}
+.pb.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pb:disabled{opacity:.3;cursor:default}
+
+/* ── LOADING ── */
+.ldg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:500;align-items:center;justify-content:center}
+.ldg.show{display:flex}
+.ldg-box{background:var(--surface);border-radius:var(--rl);padding:32px 44px;text-align:center;box-shadow:var(--shadow-md)}
+.spin{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ldg-box p{font-size:13px;color:var(--text2);margin-bottom:3px}
+.ldg-box small{font-size:11px;color:var(--text3)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--text);color:var(--bg);padding:11px 18px;border-radius:9px;font-size:13px;font-weight:500;opacity:0;transform:translateY(8px);transition:all .25s;z-index:999;max-width:300px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.ok{background:#059669;color:#fff}
+.toast.err{background:#dc2626;color:#fff}
+
+/* ══════════════════════════════
+   ABA ROTEIRO
+══════════════════════════════ */
+.route-empty{text-align:center;padding:60px 24px;color:var(--text3)}
+.route-empty .ri{font-size:48px;margin-bottom:14px}
+.route-empty h3{font-size:16px;font-weight:500;color:var(--text2);margin-bottom:8px}
+
+.route-setup{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.route-setup h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.route-setup p{font-size:13px;color:var(--text2);margin-bottom:16px}
+.rsetup-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.rsetup-grid label{display:block;font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.rsetup-grid select,.rsetup-grid input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:13px;font-family:inherit;outline:none}
+.rsetup-grid select:focus,.rsetup-grid input:focus{border-color:var(--accent)}
+
+/* Modo ativo do roteiro */
+.route-active{display:none}
+.route-active.show{display:block}
+.route-progress{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;box-shadow:var(--shadow)}
+.rp-text{font-size:13px;color:var(--text2)}
+.rp-text strong{color:var(--text);font-size:14px}
+.prog-bar-wrap{flex:1;min-width:160px;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.prog-bar{height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
+
+/* Card do cliente atual */
+.current-client{background:var(--surface);border:2px solid var(--accent);border-radius:var(--rl);padding:20px;margin-bottom:16px;box-shadow:var(--shadow-md)}
+.cc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent-text);margin-bottom:10px}
+.cc-name{font-size:18px;font-weight:600;color:var(--text);margin-bottom:4px}
+.cc-fantasia{font-size:13px;color:var(--text2);margin-bottom:12px}
+.cc-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:16px}
+.cc-field{background:var(--surface2);border-radius:8px;padding:10px 12px}
+.cc-field .lbl{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.cc-field .val{font-size:13px;font-weight:500;color:var(--text)}
+.cc-field .val.money{color:var(--accent-text);font-family:'DM Mono',monospace;font-weight:700}
+.cc-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Lista de próximos */
+.next-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow)}
+.next-list-hdr{padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+.next-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.next-item:last-child{border-bottom:none}
+.next-item:hover{background:var(--accent-light)}
+.ni-num{width:26px;height:26px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text2);flex-shrink:0}
+.ni-info{flex:1;min-width:0}
+.ni-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ni-addr{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.ni-badge{font-size:10px;font-weight:600;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 7px;color:var(--text2);white-space:nowrap;flex-shrink:0}
+.ni-badge.same{background:var(--accent-light);color:var(--accent-text);border-color:var(--accent)}
+
+/* Clientes visitados */
+.visited-list{margin-top:16px}
+.visited-item{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:8px;background:var(--surface);border:1px solid var(--border);margin-bottom:6px;opacity:.7}
+.vi-check{font-size:16px;color:#059669}
+.vi-name{font-size:12px;font-weight:500;color:var(--text)}
+.vi-addr{font-size:11px;color:var(--text3);margin-left:auto}
+
+/* ══════════════════════════════
+   ABA IMPRESSÃO
+══════════════════════════════ */
+.print-ctrl{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px;margin-bottom:20px;box-shadow:var(--shadow)}
+.print-ctrl h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.print-ctrl p{font-size:13px;color:var(--text2);margin-bottom:16px}
+.print-filters{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:16px}
+.print-filters label{display:block;font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.print-filters select{padding:8px 12px;border:1px solid var(--border);border-radius:7px;background:var(--surface2);color:var(--text);font-size:13px;font-family:inherit;outline:none;min-width:160px}
+.print-preview{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow)}
+.pp-header{padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.pp-title{font-size:14px;font-weight:600}
+.pp-count{font-size:12px;color:var(--text2)}
+
+/* ── PRINT MEDIA ── */
+@media print{
+  .hdr,.tabs-wrap,.vendor-bar,.ctrl,.print-ctrl,.ldg,.toast,.btn,.tab,.cdots,.tbtn{display:none!important}
+  .panel{display:block!important;padding:0}
+  .twrap{box-shadow:none;border:none}
+  body{background:#fff;color:#000}
+  thead{background:#f5f5f5!important}
+  th,td{border:1px solid #ddd!important;padding:6px 8px!important}
+  .print-only-show{display:block!important}
+  .print-hide{display:none!important}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .panel{padding:12px}
+  .hdr{padding:0 14px}
+  .rsetup-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cc-actions{flex-direction:column}
+  .tabs{overflow-x:auto;padding:0 14px}
+  .tab{padding:0 12px;font-size:13px}
+}
+</style>
+</head>
+<body data-theme="light" data-color="blue">
+
+<!-- LOADING -->
+<div class="ldg" id="ldg">
+  <div class="ldg-box">
+    <div class="spin"></div>
+    <p id="ldgMsg">Processando arquivo...</p>
+    <small id="ldgDet">Aguarde</small>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="logo">Cliente<span>Viz</span></div>
+  <div class="hdr-r">
+    <div class="cdots">
+      <div class="cdot on" data-color="blue" style="background:#1a56db" onclick="setColor('blue',this)"></div>
+      <div class="cdot" data-color="teal" style="background:#0d9488" onclick="setColor('teal',this)"></div>
+      <div class="cdot" data-color="violet" style="background:#7c3aed" onclick="setColor('violet',this)"></div>
+      <div class="cdot" data-color="rose" style="background:#e11d48" onclick="setColor('rose',this)"></div>
+      <div class="cdot" data-color="amber" style="background:#d97706" onclick="setColor('amber',this)"></div>
+    </div>
+    <button class="tbtn" id="tBtn" onclick="toggleTheme()">🌙</button>
+  </div>
+</header>
+
+<!-- VENDOR BAR -->
+<div class="vendor-bar" id="vendorBar">
+  <div class="vendor-name" id="vendorName">—</div>
+  <div class="vendor-meta">
+    <span class="vendor-chip" id="vcTotal">0 clientes</span>
+    <span class="vendor-chip" id="vcCidades">0 cidades</span>
+    <span class="vendor-chip" id="vcLimite">R$ 0</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap" id="tabsWrap">
+  <div class="tabs">
+    <div class="tab on" data-tab="clientes" onclick="switchTab('clientes',this)">
+      <span class="tab-icon">👥</span> Clientes
+    </div>
+    <div class="tab" data-tab="roteiro" onclick="switchTab('roteiro',this)">
+      <span class="tab-icon">🗺️</span> Roteiro
+    </div>
+    <div class="tab" data-tab="impressao" onclick="switchTab('impressao',this)">
+      <span class="tab-icon">🖨️</span> Impressão
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABA CLIENTES ══ -->
+<div class="panel on" id="panel-clientes">
+
+  <div class="upzone" id="upzone" onclick="document.getElementById('fi').click()" ondragover="onDO(event)" ondragleave="onDL()" ondrop="onDrop(event)">
+    <input type="file" id="fi" accept=".xlsx,.xls,.csv,.docx,.pdf,.txt,.json" onchange="handleFile(this.files[0])">
+    <div class="up-icon">📂</div>
+    <h3>Clique para importar ou arraste o arquivo aqui</h3>
+    <p>O sistema organiza automaticamente por Estado, Cidade, Bairro, Rua e mais</p>
+    <div class="fmts">
+      <span class="badge hi">📄 PDF</span>
+      <span class="badge">.xlsx</span><span class="badge">.xls</span>
+      <span class="badge">.csv</span><span class="badge">.docx</span><span class="badge">.json</span>
+    </div>
+  </div>
+
+  <div id="clientesContent" style="display:none">
+    <div class="stats">
+      <div class="sc"><div class="sc-lbl">Total</div><div class="sc-val a" id="sTotal">0</div></div>
+      <div class="sc"><div class="sc-lbl">Mostrando</div><div class="sc-val" id="sShow">0</div></div>
+      <div class="sc"><div class="sc-lbl">Cidades</div><div class="sc-val" id="sCid">0</div></div>
+      <div class="sc"><div class="sc-lbl">Bairros</div><div class="sc-val" id="sBai">0</div></div>
+      <div class="sc"><div class="sc-lbl">Ativos</div><div class="sc-val" id="sAtv">0</div></div>
+      <div class="sc"><div class="sc-lbl">Limite total</div><div class="sc-val a" id="sLim">—</div></div>
+    </div>
+
+    <div class="ctrl">
+      <div class="sw"><span class="si">🔍</span><input type="text" id="q" placeholder="Buscar cliente, fantasia, bairro, cidade..." oninput="applyF()"></div>
+      <select id="fEst" onchange="applyF()"><option value="">Todos os estados</option></select>
+      <select id="fCid" onchange="cascataBairro();applyF()"><option value="">Todas as cidades</option></select>
+      <select id="fBai" onchange="applyF()"><option value="">Todos os bairros</option></select>
+      <select id="fStt" onchange="applyF()">
+        <option value="">Todos status</option>
+        <option value="ATIVO">Ativo</option>
+        <option value="INATIVO">Inativo</option>
+      </select>
+      <select id="fLim" onchange="applyF()">
+        <option value="">Qualquer limite</option>
+        <option value="0">Sem limite</option>
+        <option value="1">Com limite</option>
+        <option value="50000">Acima R$ 50k</option>
+        <option value="100000">Acima R$ 100k</option>
+        <option value="500000">Acima R$ 500k</option>
+      </select>
+      <select id="pp" onchange="applyF()">
+        <option value="25">25/pág</option>
+        <option value="50">50/pág</option>
+        <option value="100">100/pág</option>
+      </select>
+      <button class="btn" onclick="exportCSV()">⬇ CSV</button>
+      <button class="btn danger" onclick="clearData()">🗑 Limpar</button>
+    </div>
+
+    <div class="twrap">
+      <div class="tscroll">
+        <table>
+          <thead id="tHead"></thead>
+          <tbody id="tBody"></tbody>
+        </table>
+      </div>
+      <div class="pgn" id="pgn"></div>
+    </div>
+    <div class="nodata" id="nodata" style="display:none">
+      <div class="ni">🔎</div>
+      <p style="color:var(--text2)">Nenhum resultado. Ajuste os filtros.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABA ROTEIRO ══ -->
+<div class="panel" id="panel-roteiro">
+  <div class="route-empty" id="routeEmpty">
+    <div class="ri">🗺️</div>
+    <h3>Nenhum dado carregado</h3>
+    <p>Importe um arquivo na aba Clientes para criar roteiros.</p>
+  </div>
+
+  <div id="routeContent" style="display:none">
+    <!-- Setup -->
+    <div class="route-setup" id="routeSetup">
+      <h3>📍 Criar novo roteiro</h3>
+      <p>Escolha o ponto de partida e filtre os clientes que deseja visitar.</p>
+      <div class="rsetup-grid">
+        <div>
+          <label>Cidade de início</label>
+          <select id="rCidade" onchange="updateRBairro()"><option value="">Todas as cidades</option></select>
+        </div>
+        <div>
+          <label>Bairro de início (opcional)</label>
+          <select id="rBairro"><option value="">Todos os bairros</option></select>
+        </div>
+        <div>
+          <button class="btn primary" onclick="startRoute()" style="height:38px;margin-bottom:0">🚀 Iniciar roteiro</button>
+        </div>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <label style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px;cursor:pointer">
+          <input type="checkbox" id="rSoAtivos" checked> Somente ativos
+        </label>
+        <label style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px;cursor:pointer">
+          <input type="checkbox" id="rOrdemBairro" checked> Agrupar por bairro
+        </label>
+      </div>
+    </div>
+
+    <!-- Roteiro ativo -->
+    <div class="route-active" id="routeActive">
+      <div class="route-progress">
+        <div class="rp-text">
+          Visitados: <strong id="rpVisit">0</strong> de <strong id="rpTotal">0</strong>
+        </div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="progBar" style="width:0%"></div></div>
+        <div style="display:flex;gap:6px">
+          <button class="btn" onclick="skipCurrent()">⏭ Pular</button>
+          <button class="btn danger" onclick="resetRoute()">✖ Encerrar</button>
+        </div>
+      </div>
+
+      <!-- Cliente atual -->
+      <div class="current-client" id="currentCard">
+        <div class="cc-label">📍 Próxima visita</div>
+        <div class="cc-name" id="ccName">—</div>
+        <div class="cc-fantasia" id="ccFantasia">—</div>
+        <div class="cc-info">
+          <div class="cc-field"><div class="lbl">Cidade</div><div class="val" id="ccCidade">—</div></div>
+          <div class="cc-field"><div class="lbl">Bairro</div><div class="val" id="ccBairro">—</div></div>
+          <div class="cc-field"><div class="lbl">Endereço</div><div class="val" id="ccEnder">—</div></div>
+          <div class="cc-field"><div class="lbl">Limite</div><div class="val money" id="ccLimite">—</div></div>
+          <div class="cc-field"><div class="lbl">Status</div><div class="val" id="ccStatus">—</div></div>
+        </div>
+        <div class="cc-actions">
+          <button class="btn success" onclick="markVisited()">✅ Marcar como visitado</button>
+          <button class="btn primary" onclick="openMaps()">🗺️ Abrir no Google Maps</button>
+          <button class="btn" onclick="skipCurrent()">⏭ Pular este cliente</button>
+        </div>
+      </div>
+
+      <!-- Próximos -->
+      <div class="next-list" id="nextList">
+        <div class="next-list-hdr">Próximos clientes na rota</div>
+        <div id="nextItems"></div>
+      </div>
+
+      <!-- Visitados -->
+      <div class="visited-list" id="visitedList" style="display:none">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:8px">✅ Visitados</div>
+        <div id="visitedItems"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABA IMPRESSÃO ══ -->
+<div class="panel" id="panel-impressao">
+  <div class="print-ctrl">
+    <h3>🖨️ Impressão e exportação</h3>
+    <p>Filtre os clientes que deseja imprimir ou exportar.</p>
+    <div class="print-filters">
+      <div>
+        <label>Cidade</label>
+        <select id="pCid" onchange="buildPrintTable()"><option value="">Todas</option></select>
+      </div>
+      <div>
+        <label>Bairro</label>
+        <select id="pBai" onchange="buildPrintTable()"><option value="">Todos</option></select>
+      </div>
+      <div>
+        <label>Status</label>
+        <select id="pStt" onchange="buildPrintTable()">
+          <option value="">Todos</option>
+          <option value="ATIVO">Ativo</option>
+          <option value="INATIVO">Inativo</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn primary" onclick="window.print()">🖨️ Imprimir</button>
+      <button class="btn" onclick="exportPrintCSV()">⬇ Exportar seleção CSV</button>
+    </div>
+  </div>
+
+  <div class="print-preview">
+    <div class="pp-header">
+      <span class="pp-title" id="ppTitle">Todos os clientes</span>
+      <span class="pp-count" id="ppCount">0 registros</span>
+    </div>
+    <div class="tscroll">
+      <table>
+        <thead id="ptHead"></thead>
+        <tbody id="ptBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const SK='cviz_v3';
+// Colunas da tabela principal
+const COLS=['Estado','Cidade','Bairro','Rua','Nº','Fantasia','Limite','Status'];
+
+let allData=[], filteredData=[], printData=[];
+let sortCol=-1, sortAsc=true, curPage=1;
+let routeQueue=[], routeVisited=[], routeIdx=0;
+
+/* ── THEME / COLOR ── */
+(function(){
+  const t=localStorage.getItem('cv_t')||'light';
+  const c=localStorage.getItem('cv_c')||'blue';
+  document.body.dataset.theme=t;
+  document.body.dataset.color=c;
+  document.getElementById('tBtn').textContent=t==='dark'?'☀️':'🌙';
+  document.querySelectorAll('.cdot').forEach(d=>d.classList.toggle('on',d.dataset.color===c));
+})();
+function toggleTheme(){
+  const d=document.body.dataset.theme==='dark';
+  document.body.dataset.theme=d?'light':'dark';
+  document.getElementById('tBtn').textContent=d?'🌙':'☀️';
+  localStorage.setItem('cv_t',document.body.dataset.theme);
+}
+function setColor(c,el){
+  document.body.dataset.color=c;
+  document.querySelectorAll('.cdot').forEach(d=>d.classList.remove('on'));
+  el.classList.add('on');
+  localStorage.setItem('cv_c',c);
+}
+
+/* ── TABS ── */
+function switchTab(id,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('panel-'+id).classList.add('on');
+  if(id==='impressao') buildPrintFilters();
+  if(id==='roteiro') buildRouteFilters();
+}
+
+/* ── UTILS ── */
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast show '+type;
+  setTimeout(()=>t.className='toast',3200);
+}
+function setLdg(v,msg='Processando...',det=''){
+  document.getElementById('ldg').classList.toggle('show',v);
+  document.getElementById('ldgMsg').textContent=msg;
+  document.getElementById('ldgDet').textContent=det;
+}
+function onDO(e){e.preventDefault();document.getElementById('upzone').classList.add('drag')}
+function onDL(){document.getElementById('upzone').classList.remove('drag')}
+function onDrop(e){e.preventDefault();onDL();const f=e.dataTransfer.files[0];if(f)handleFile(f)}
+
+/* ── FILE HANDLER ── */
+async function handleFile(file){
+  if(!file) return;
+  setLdg(true,'Lendo arquivo...',file.name);
+  try{
+    const ext=file.name.split('.').pop().toLowerCase();
+    let data=[];
+    if(['xlsx','xls'].includes(ext)) data=await readExcel(file);
+    else if(ext==='csv') data=await readCSV(file);
+    else if(ext==='pdf'){setLdg(true,'Analisando PDF...','Reconhecimento inteligente de colunas');data=await readPDF(file);}
+    else if(ext==='docx') data=await readDocx(file);
+    else if(ext==='json') data=await readJSON(file);
+    else{toast('Formato não suportado','err');setLdg(false);return;}
+    if(!data.length){toast('Arquivo vazio ou sem dados reconhecíveis','err');setLdg(false);return;}
+    allData=data;
+    saveStorage();
+    initUI();
+    toast(`✔ ${data.length.toLocaleString('pt-BR')} registros importados!`,'ok');
+  }catch(e){console.error(e);toast('Erro: '+e.message,'err');}
+  setLdg(false);
+}
+
+/* ── PDF READER ── */
+async function readPDF(file){
+  const buf=await file.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+  let lines=[];
+  for(let p=1;p<=pdf.numPages;p++){
+    const page=await pdf.getPage(p);
+    const ct=await page.getTextContent();
+    const byY={};
+    ct.items.forEach(it=>{
+      const y=Math.round(it.transform[5]);
+      if(!byY[y])byY[y]=[];
+      byY[y].push({x:it.transform[4],text:it.str.trim()});
+    });
+    Object.keys(byY).sort((a,b)=>b-a).forEach(y=>{
+      const ln=byY[y].sort((a,b)=>a.x-b.x).map(i=>i.text).join(' ').trim();
+      if(ln) lines.push(ln);
+    });
+  }
+  return parsePDFLines(lines);
+}
+
+function parsePDFLines(lines){
+  const records=[];
+  const statusRx=/\b(ATIVO|INATIVO)\b/;
+  lines.forEach(line=>{
+    if(line.length<30||!/\d{4,}\s*-\s/.test(line)) return;
+    try{
+      const statusM=statusRx.exec(line);
+      const status=statusM?statusM[1]:'ATIVO';
+      // Extrai valor monetário
+      const vals=[...line.matchAll(/(\d{1,3}(?:\.\d{3})*,\d{2})/g)].map(m=>m[1]);
+      const limiteRaw=vals.length?vals[vals.length-1]:'0';
+      // Fantasia: texto após status
+      let fantasia='';
+      if(statusM){
+        fantasia=line.substring(statusM.index+statusM[0].length).replace(/\d{1,3}(?:\.\d{3})*,\d{2}/g,'').trim();
+      }
+      // Segmentos por padrão ID - TEXTO
+      const segs=[...line.matchAll(/(\d{4,})\s*-\s*([^0-9\n]+?)(?=\s*\d{4,}\s*-|\s*\d{1,3}(?:\.\d{3})*,\d{2}|\s*ATIVO|\s*INATIVO|$)/g)];
+      let vendedor='',cidade='',cliente='',bairro='',rua='',numero='',estado='PI';
+      if(segs.length>=3){
+        vendedor=segs[0][2].trim();
+        cidade=segs[1][2].trim();
+        cliente=segs[2][2].trim();
+        if(segs[3]) bairro=segs[3][2].trim();
+        // Endereço: após bairro
+        if(segs[4]){
+          const endereco=segs[4][2].trim();
+          // Tenta separar rua e número
+          const numM=endereco.match(/\s+(\d+)\s*$/);
+          if(numM){numero=numM[1];rua=endereco.replace(numM[0],'').trim();}
+          else rua=endereco;
+        } else {
+          // Tenta extrair do texto bruto
+          const aposB=segs[3]?line.indexOf(segs[3][0])+segs[3][0].length:0;
+          const aposV=vals.length?line.lastIndexOf(vals[vals.length-1]):line.length;
+          const endTrecho=line.substring(aposB,aposV).replace(/ATIVO|INATIVO/g,'').trim();
+          const numM=endTrecho.match(/(\d+)\s*$/);
+          if(numM){numero=numM[1];rua=endTrecho.replace(numM[0],'').trim();}
+          else rua=endTrecho;
+        }
+      } else return;
+      const lim=parseLimite(limiteRaw);
+      records.push({
+        Estado:estado,
+        Cidade:limpa(cidade),
+        Bairro:limpa(bairro),
+        Rua:limpa(rua),
+        'Nº':numero,
+        Cliente:limpa(cliente),
+        Fantasia:fantasia,
+        Limite:limiteRaw,
+        Status:status,
+        _lim:lim,
+        _vendedor:limpa(vendedor),
+        _endereco_completo:limpa(rua)+' '+numero+', '+limpa(bairro)+', '+limpa(cidade)
+      });
+    }catch(e){}
+  });
+  // Dedup
+  const seen=new Set();
+  return records.filter(r=>{
+    if(!r.Cliente||r.Cliente.length<3) return false;
+    const k=r.Cliente+'|'+r.Cidade+'|'+r.Limite;
+    if(seen.has(k)) return false;
+    seen.add(k); return true;
+  });
+}
+
+function limpa(t){return t.replace(/\s+/g,' ').replace(/^\d+\s*-\s*/,'').trim();}
+function parseLimite(v){
+  if(!v||v==='0') return 0;
+  return parseFloat(String(v).replace(/\./g,'').replace(',','.'))||0;
+}
+
+/* ── EXCEL ── */
+async function readExcel(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>{
+      try{
+        const wb=XLSX.read(e.target.result,{type:'array'});
+        const ws=wb.Sheets[wb.SheetNames[0]];
+        const json=XLSX.utils.sheet_to_json(ws,{defval:''});
+        res(json.map(mapRow));
+      }catch(err){rej(err);}
+    };
+    r.readAsArrayBuffer(file);
+  });
+}
+async function readCSV(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>{
+      try{
+        const text=e.target.result;
+        const sep=text.split(';').length>text.split(',').length?';':',';
+        const lines=text.trim().split('\n').filter(l=>l.trim());
+        const hdrs=lines[0].split(sep).map(h=>h.trim().replace(/^"|"$/g,''));
+        const json=lines.slice(1).map(line=>{
+          const vals=line.split(sep).map(v=>v.trim().replace(/^"|"$/g,''));
+          const obj={};hdrs.forEach((h,i)=>obj[h]=vals[i]||'');return obj;
+        });
+        res(json.map(mapRow));
+      }catch(err){rej(err);}
+    };
+    r.readAsText(file,'UTF-8');
+  });
+}
+async function readDocx(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>{
+      mammoth.extractRawText({arrayBuffer:e.target.result}).then(rt=>{
+        const lines=rt.value.split('\n').filter(l=>l.trim());
+        const d=parsePDFLines(lines);
+        res(d.length?d:lines.map(l=>({Estado:'',Cidade:'',Bairro:'',Rua:l,Nº:'',Cliente:l,Fantasia:'',Limite:'0',Status:'',_lim:0,_vendedor:'',_endereco_completo:l})));
+      }).catch(rej);
+    };
+    r.readAsArrayBuffer(file);
+  });
+}
+async function readJSON(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>{
+      try{
+        let p=JSON.parse(e.target.result);
+        if(!Array.isArray(p)) p=[p];
+        res(p.map(mapRow));
+      }catch(err){rej(err);}
+    };
+    r.readAsText(file,'UTF-8');
+  });
+}
+function mapRow(row){
+  const keys=Object.keys(row);
+  const find=(...kws)=>{const k=keys.find(k=>kws.some(w=>k.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(w)));return k?String(row[k]||''):''};
+  const limRaw=find('limite','valor','credito','saldo');
+  const lim=parseLimite(limRaw);
+  const rua=find('rua','logradouro','endereco','address');
+  const num=find('numero','num','nro','nr');
+  const cidade=find('cidade','city','municipio');
+  const bairro=find('bairro','district');
+  return{
+    Estado:find('estado','uf','state')||'',
+    Cidade:cidade,Bairro:bairro,Rua:rua,'Nº':num,
+    Cliente:find('cliente','nome','razao','empresa')||find('name'),
+    Fantasia:find('fantasia','nome fantasia'),
+    Limite:limRaw,Status:find('status','situacao')||'ATIVO',
+    _lim:lim,_vendedor:'',
+    _endereco_completo:rua+' '+num+', '+bairro+', '+cidade
+  };
+}
+
+/* ── INIT UI ── */
+function initUI(){
+  // Vendor bar
+  const vendors=[...new Set(allData.map(r=>r._vendedor).filter(Boolean))];
+  const vb=document.getElementById('vendorBar');
+  if(vendors.length===1){
+    document.getElementById('vendorName').textContent='Vendedor: '+vendors[0];
+    document.getElementById('vcTotal').textContent=allData.length+' clientes';
+    document.getElementById('vcCidades').textContent=new Set(allData.map(r=>r.Cidade).filter(Boolean)).size+' cidades';
+    const tot=allData.reduce((s,r)=>s+r._lim,0);
+    document.getElementById('vcLimite').textContent='R$ '+tot.toLocaleString('pt-BR',{maximumFractionDigits:0});
+    vb.classList.add('show');
+    document.getElementById('tabsWrap').classList.add('with-vendor');
+  } else {
+    vb.classList.remove('show');
+    document.getElementById('tabsWrap').classList.remove('with-vendor');
+  }
+  document.getElementById('upzone').style.display='none';
+  document.getElementById('clientesContent').style.display='';
+  buildFilters();
+  applyF();
+}
+
+/* ── FILTERS ── */
+function buildFilters(){
+  const fill=(id,vals,pfx)=>{
+    const el=document.getElementById(id);
+    el.innerHTML=`<option value="">${pfx}</option>`+vals.map(v=>`<option value="${v}">${v}</option>`).join('');
+  };
+  fill('fEst',[...new Set(allData.map(r=>r.Estado).filter(Boolean))].sort(),'Todos os estados');
+  fill('fCid',[...new Set(allData.map(r=>r.Cidade).filter(Boolean))].sort(),'Todas as cidades');
+  fill('fBai',[...new Set(allData.map(r=>r.Bairro).filter(Boolean))].sort(),'Todos os bairros');
+}
+function cascataBairro(){
+  const cid=document.getElementById('fCid').value;
+  const bairros=cid?[...new Set(allData.filter(r=>r.Cidade===cid).map(r=>r.Bairro).filter(Boolean))].sort()
+                   :[...new Set(allData.map(r=>r.Bairro).filter(Boolean))].sort();
+  const el=document.getElementById('fBai');
+  el.innerHTML='<option value="">Todos os bairros</option>'+bairros.map(b=>`<option value="${b}">${b}</option>`).join('');
+}
+
+function applyF(){
+  curPage=1;
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  const fE=document.getElementById('fEst').value;
+  const fC=document.getElementById('fCid').value;
+  const fB=document.getElementById('fBai').value;
+  const fS=document.getElementById('fStt').value;
+  const fL=document.getElementById('fLim').value;
+
+  filteredData=allData.filter(r=>{
+    if(fE&&r.Estado!==fE) return false;
+    if(fC&&r.Cidade!==fC) return false;
+    if(fB&&r.Bairro!==fB) return false;
+    if(fS&&r.Status!==fS) return false;
+    if(fL!==''){
+      const l=r._lim||0;
+      if(fL==='0'&&l!==0) return false;
+      if(fL==='1'&&l===0) return false;
+      if(fL==='50000'&&l<=50000) return false;
+      if(fL==='100000'&&l<=100000) return false;
+      if(fL==='500000'&&l<=500000) return false;
+    }
+    if(q){
+      const hay=[r.Estado,r.Cidade,r.Bairro,r.Rua,r.Cliente,r.Fantasia].join(' ').toLowerCase();
+      return hay.includes(q);
+    }
+    return true;
+  });
+
+  if(sortCol>=0){
+    const k=COLS[sortCol];
+    filteredData.sort((a,b)=>{
+      if(k==='Limite') return sortAsc?(a._lim||0)-(b._lim||0):(b._lim||0)-(a._lim||0);
+      return sortAsc?String(a[k]||'').localeCompare(String(b[k]||''),'pt-BR'):String(b[k]||'').localeCompare(String(a[k]||''),'pt-BR');
+    });
+  }
+  updateStats(); renderTable();
+}
+
+function updateStats(){
+  document.getElementById('sTotal').textContent=allData.length.toLocaleString('pt-BR');
+  document.getElementById('sShow').textContent=filteredData.length.toLocaleString('pt-BR');
+  document.getElementById('sCid').textContent=new Set(allData.map(r=>r.Cidade).filter(Boolean)).size;
+  document.getElementById('sBai').textContent=new Set(allData.map(r=>r.Bairro).filter(Boolean)).size;
+  document.getElementById('sAtv').textContent=allData.filter(r=>r.Status==='ATIVO').length.toLocaleString('pt-BR');
+  const tot=allData.reduce((s,r)=>s+(r._lim||0),0);
+  document.getElementById('sLim').textContent=tot>0?'R$ '+tot.toLocaleString('pt-BR',{maximumFractionDigits:0}):'—';
+}
+
+function renderTable(){
+  const pp=parseInt(document.getElementById('pp').value);
+  const start=(curPage-1)*pp;
+  const page=filteredData.slice(start,start+pp);
+
+  document.getElementById('tHead').innerHTML='<tr>'+COLS.map((h,i)=>{
+    const a=sortCol===i?' sorted':'';
+    const ic=sortCol===i?(sortAsc?'▲':'▼'):'▼';
+    return`<th class="${a}" onclick="sortBy(${i})">${h}<span class="si2">${ic}</span></th>`;
+  }).join('')+'</tr>';
+
+  const tb=document.getElementById('tBody');
+  if(!page.length){
+    tb.innerHTML='';
+    document.getElementById('nodata').style.display='';
+    document.getElementById('twrap')||0;
+    renderPgn(pp); return;
+  }
+  document.getElementById('nodata').style.display='none';
+
+  tb.innerHTML=page.map(r=>`<tr>
+    <td>${r.Estado}</td>
+    <td>${r.Cidade}</td>
+    <td>${r.Bairro}</td>
+    <td title="${r.Rua}">${r.Rua}</td>
+    <td style="max-width:60px">${r['Nº']}</td>
+    <td class="fantasia" title="${r.Fantasia}" style="font-weight:500">${r.Fantasia||r.Cliente}</td>
+    <td class="v-cell ${r._lim>100000?'v-hi':r._lim===0?'v-z':''}">${fmtLim(r._lim)}</td>
+    <td><span class="${r.Status==='ATIVO'?'s-on':'s-off'}">${r.Status}</span></td>
+  </tr>`).join('');
+  renderPgn(pp);
+}
+
+function fmtLim(n){if(!n)return'R$ 0';return'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+function sortBy(i){
+  if(sortCol===i)sortAsc=!sortAsc;else{sortCol=i;sortAsc=true;}
+  applyF();
+}
+
+function renderPgn(pp){
+  const total=filteredData.length,pages=Math.ceil(total/pp);
+  const pg=document.getElementById('pgn');
+  if(pages<=1){pg.innerHTML=`<span class="pg-info">${total.toLocaleString('pt-BR')} registros</span>`;return;}
+  const s=(curPage-1)*pp+1,e=Math.min(curPage*pp,total);
+  let b=`<span class="pg-info">${s}–${e} de ${total.toLocaleString('pt-BR')}</span><div class="pg-btns">`;
+  b+=`<button class="pb" onclick="goP(${curPage-1})" ${curPage===1?'disabled':''}>‹</button>`;
+  pgRange(curPage,pages).forEach(p=>{
+    b+=p==='…'?`<button class="pb" disabled>…</button>`:`<button class="pb ${p===curPage?'on':''}" onclick="goP(${p})">${p}</button>`;
+  });
+  b+=`<button class="pb" onclick="goP(${curPage+1})" ${curPage===pages?'disabled':''}>›</button></div>`;
+  pg.innerHTML=b;
+}
+function pgRange(c,t){
+  if(t<=7)return Array.from({length:t},(_,i)=>i+1);
+  const r=[1];if(c>3)r.push('…');
+  for(let i=Math.max(2,c-1);i<=Math.min(t-1,c+1);i++)r.push(i);
+  if(c<t-2)r.push('…');r.push(t);return r;
+}
+function goP(p){
+  const pp=parseInt(document.getElementById('pp').value);
+  const pages=Math.ceil(filteredData.length/pp);
+  if(p<1||p>pages)return;
+  curPage=p;renderTable();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── EXPORT ── */
+function exportCSV(){
+  if(!filteredData.length){toast('Nenhum dado','err');return;}
+  const rows=[COLS.join(';'),...filteredData.map(r=>COLS.map(c=>`"${(r[c]??'').toString().replace(/"/g,'""')}"`).join(';'))];
+  dl('\ufeff'+rows.join('\n'),'clientes_export.csv','text/csv;charset=utf-8');
+  toast('CSV exportado!','ok');
+}
+function dl(content,name,type){
+  const b=new Blob([content],{type});const a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=name;a.click();
+}
+
+/* ── CLEAR ── */
+function clearData(){
+  if(!confirm('Limpar todos os dados?'))return;
+  allData=[];filteredData=[];sortCol=-1;curPage=1;
+  routeQueue=[];routeVisited=[];routeIdx=0;
+  document.getElementById('clientesContent').style.display='none';
+  document.getElementById('upzone').style.display='';
+  document.getElementById('vendorBar').classList.remove('show');
+  document.getElementById('tabsWrap').classList.remove('with-vendor');
+  document.getElementById('nodata').style.display='none';
+  document.getElementById('fi').value='';
+  localStorage.removeItem(SK);
+  toast('Dados limpos.','');
+}
+
+/* ══════════════════════════════
+   ROTEIRO
+══════════════════════════════ */
+function buildRouteFilters(){
+  if(!allData.length){
+    document.getElementById('routeEmpty').style.display='';
+    document.getElementById('routeContent').style.display='none';
+    return;
+  }
+  document.getElementById('routeEmpty').style.display='none';
+  document.getElementById('routeContent').style.display='';
+
+  const cidades=[...new Set(allData.map(r=>r.Cidade).filter(Boolean))].sort();
+  const rC=document.getElementById('rCidade');
+  rC.innerHTML='<option value="">Todas as cidades</option>'+cidades.map(c=>`<option value="${c}">${c}</option>`).join('');
+}
+
+function updateRBairro(){
+  const cid=document.getElementById('rCidade').value;
+  const bairros=cid?[...new Set(allData.filter(r=>r.Cidade===cid).map(r=>r.Bairro).filter(Boolean))].sort()
+                   :[...new Set(allData.map(r=>r.Bairro).filter(Boolean))].sort();
+  const rB=document.getElementById('rBairro');
+  rB.innerHTML='<option value="">Todos os bairros</option>'+bairros.map(b=>`<option value="${b}">${b}</option>`).join('');
+}
+
+function startRoute(){
+  const cid=document.getElementById('rCidade').value;
+  const bai=document.getElementById('rBairro').value;
+  const soAtivos=document.getElementById('rSoAtivos').checked;
+  const porBairro=document.getElementById('rOrdemBairro').checked;
+
+  let pool=allData.filter(r=>{
+    if(soAtivos&&r.Status!=='ATIVO') return false;
+    if(cid&&r.Cidade!==cid) return false;
+    return true;
+  });
+
+  if(!pool.length){toast('Nenhum cliente encontrado com esses filtros','err');return;}
+
+  // Ordena: primeiro bairro de início, depois por bairro e cidade
+  if(porBairro){
+    pool.sort((a,b)=>{
+      const aFirst=bai&&a.Bairro===bai?0:1;
+      const bFirst=bai&&b.Bairro===bai?0:1;
+      if(aFirst!==bFirst) return aFirst-bFirst;
+      if(a.Cidade!==b.Cidade) return a.Cidade.localeCompare(b.Cidade,'pt-BR');
+      return a.Bairro.localeCompare(b.Bairro,'pt-BR');
+    });
+  }
+
+  routeQueue=[...pool];
+  routeVisited=[];
+  routeIdx=0;
+
+  document.getElementById('routeSetup').style.display='none';
+  document.getElementById('routeActive').classList.add('show');
+  renderCurrentClient();
+  toast(`Roteiro iniciado: ${pool.length} clientes`,'ok');
+}
+
+function renderCurrentClient(){
+  if(routeIdx>=routeQueue.length){
+    // Roteiro concluído
+    document.getElementById('currentCard').innerHTML=`
+      <div style="text-align:center;padding:30px">
+        <div style="font-size:48px;margin-bottom:12px">🎉</div>
+        <h3 style="font-size:18px;font-weight:600;margin-bottom:8px">Roteiro concluído!</h3>
+        <p style="color:var(--text2);margin-bottom:16px">Você visitou ${routeVisited.length} cliente(s).</p>
+        <button class="btn primary" onclick="resetRoute()">Novo roteiro</button>
+      </div>`;
+    document.getElementById('nextItems').innerHTML='';
+    updateProgress();
+    return;
+  }
+
+  const r=routeQueue[routeIdx];
+  document.getElementById('ccName').textContent=r.Cliente;
+  document.getElementById('ccFantasia').textContent=r.Fantasia||'—';
+  document.getElementById('ccCidade').textContent=r.Cidade||'—';
+  document.getElementById('ccBairro').textContent=r.Bairro||'—';
+  document.getElementById('ccEnder').textContent=(r.Rua?r.Rua+' '+(r['Nº']||''):'—').trim();
+  document.getElementById('ccLimite').textContent=fmtLim(r._lim);
+  document.getElementById('ccStatus').innerHTML=`<span class="${r.Status==='ATIVO'?'s-on':'s-off'}">${r.Status}</span>`;
+
+  // Próximos (até 8)
+  const next=routeQueue.slice(routeIdx+1,routeIdx+9);
+  document.getElementById('nextItems').innerHTML=next.length?next.map((n,i)=>{
+    const sameBairro=n.Bairro===r.Bairro;
+    return`<div class="next-item" onclick="jumpTo(${routeIdx+1+i})">
+      <div class="ni-num">${i+1}</div>
+      <div class="ni-info">
+        <div class="ni-name">${n.Fantasia||n.Cliente}</div>
+        <div class="ni-addr">${n.Bairro} · ${n.Cidade}</div>
+      </div>
+      <span class="ni-badge ${sameBairro?'same':''}">${sameBairro?'Mesmo bairro':n.Bairro}</span>
+    </div>`;
+  }).join(''):'<div style="padding:16px;text-align:center;color:var(--text3);font-size:13px">Último cliente da rota</div>';
+
+  updateProgress();
+  renderVisited();
+}
+
+function updateProgress(){
+  const total=routeQueue.length;
+  const done=routeVisited.length;
+  document.getElementById('rpVisit').textContent=done;
+  document.getElementById('rpTotal').textContent=total;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('progBar').style.width=pct+'%';
+}
+
+function renderVisited(){
+  const vl=document.getElementById('visitedList');
+  const vi=document.getElementById('visitedItems');
+  if(!routeVisited.length){vl.style.display='none';return;}
+  vl.style.display='';
+  vi.innerHTML=[...routeVisited].reverse().map(r=>`
+    <div class="visited-item">
+      <span class="vi-check">✅</span>
+      <span class="vi-name">${r.Fantasia||r.Cliente}</span>
+      <span class="vi-addr">${r.Bairro}, ${r.Cidade}</span>
+    </div>`).join('');
+}
+
+function markVisited(){
+  if(routeIdx>=routeQueue.length) return;
+  routeVisited.push(routeQueue[routeIdx]);
+  routeIdx++;
+  renderCurrentClient();
+  toast('✅ Cliente marcado como visitado!','ok');
+}
+
+function skipCurrent(){
+  if(routeIdx>=routeQueue.length) return;
+  // Move para o final da fila
+  const skipped=routeQueue.splice(routeIdx,1)[0];
+  routeQueue.push(skipped);
+  renderCurrentClient();
+  toast('Cliente pulado, voltará ao final da fila.');
+}
+
+function jumpTo(idx){
+  routeIdx=idx;
+  renderCurrentClient();
+}
+
+function openMaps(){
+  if(routeIdx>=routeQueue.length) return;
+  const r=routeQueue[routeIdx];
+  const addr=encodeURIComponent((r.Rua+' '+(r['Nº']||'')+', '+r.Bairro+', '+r.Cidade+', Piauí, Brasil').trim());
+  window.open('https://www.google.com/maps/search/?api=1&query='+addr,'_blank');
+}
+
+function resetRoute(){
+  routeQueue=[];routeVisited=[];routeIdx=0;
+  document.getElementById('routeSetup').style.display='';
+  document.getElementById('routeActive').classList.remove('show');
+  document.getElementById('nextItems').innerHTML='';
+  document.getElementById('visitedItems').innerHTML='';
+  // Restaura card
+  document.getElementById('currentCard').innerHTML=`
+    <div class="cc-label">📍 Próxima visita</div>
+    <div class="cc-name" id="ccName">—</div>
+    <div class="cc-fantasia" id="ccFantasia">—</div>
+    <div class="cc-info">
+      <div class="cc-field"><div class="lbl">Cidade</div><div class="val" id="ccCidade">—</div></div>
+      <div class="cc-field"><div class="lbl">Bairro</div><div class="val" id="ccBairro">—</div></div>
+      <div class="cc-field"><div class="lbl">Endereço</div><div class="val" id="ccEnder">—</div></div>
+      <div class="cc-field"><div class="lbl">Limite</div><div class="val money" id="ccLimite">—</div></div>
+      <div class="cc-field"><div class="lbl">Status</div><div class="val" id="ccStatus">—</div></div>
+    </div>
+    <div class="cc-actions">
+      <button class="btn success" onclick="markVisited()">✅ Marcar como visitado</button>
+      <button class="btn primary" onclick="openMaps()">🗺️ Abrir no Google Maps</button>
+      <button class="btn" onclick="skipCurrent()">⏭ Pular este cliente</button>
+    </div>`;
+}
+
+/* ══════════════════════════════
+   IMPRESSÃO
+══════════════════════════════ */
+function buildPrintFilters(){
+  if(!allData.length) return;
+  const fill=(id,vals,pfx)=>{
+    const el=document.getElementById(id);
+    el.innerHTML=`<option value="">${pfx}</option>`+vals.map(v=>`<option value="${v}">${v}</option>`).join('');
+  };
+  fill('pCid',[...new Set(allData.map(r=>r.Cidade).filter(Boolean))].sort(),'Todas');
+  fill('pBai',[...new Set(allData.map(r=>r.Bairro).filter(Boolean))].sort(),'Todos');
+  buildPrintTable();
+}
+
+function buildPrintTable(){
+  const cid=document.getElementById('pCid').value;
+  const bai=document.getElementById('pBai').value;
+  const stt=document.getElementById('pStt').value;
+
+  printData=allData.filter(r=>{
+    if(cid&&r.Cidade!==cid) return false;
+    if(bai&&r.Bairro!==bai) return false;
+    if(stt&&r.Status!==stt) return false;
+    return true;
+  });
+
+  // Ordena por Cidade > Bairro > Fantasia
+  printData.sort((a,b)=>{
+    if(a.Cidade!==b.Cidade) return a.Cidade.localeCompare(b.Cidade,'pt-BR');
+    if(a.Bairro!==b.Bairro) return a.Bairro.localeCompare(b.Bairro,'pt-BR');
+    return (a.Fantasia||a.Cliente).localeCompare(b.Fantasia||b.Cliente,'pt-BR');
+  });
+
+  const title=cid?(bai?`${cid} — ${bai}`:cid):'Todos os clientes';
+  document.getElementById('ppTitle').textContent=title;
+  document.getElementById('ppCount').textContent=printData.length.toLocaleString('pt-BR')+' registros';
+
+  document.getElementById('ptHead').innerHTML='<tr>'+COLS.map(h=>`<th>${h}</th>`).join('')+'</tr>';
+  document.getElementById('ptBody').innerHTML=printData.map(r=>`<tr>
+    <td>${r.Estado}</td><td>${r.Cidade}</td><td>${r.Bairro}</td>
+    <td>${r.Rua}</td><td>${r['Nº']}</td>
+    <td>${r.Fantasia||r.Cliente}</td>
+    <td style="text-align:right">${fmtLim(r._lim)}</td>
+    <td>${r.Status}</td>
+  </tr>`).join('');
+}
+
+function exportPrintCSV(){
+  if(!printData.length){toast('Nenhum dado','err');return;}
+  const rows=[COLS.join(';'),...printData.map(r=>COLS.map(c=>`"${(r[c]??'').toString().replace(/"/g,'""')}"`).join(';'))];
+  dl('\ufeff'+rows.join('\n'),'clientes_impressao.csv','text/csv;charset=utf-8');
+  toast('CSV exportado!','ok');
+}
+
+/* ── STORAGE ── */
+function saveStorage(){
+  try{localStorage.setItem(SK,JSON.stringify({allData}));}catch(e){}
+}
+function loadStorage(){
+  try{
+    const raw=localStorage.getItem(SK);
+    if(!raw) return;
+    const{allData:d}=JSON.parse(raw);
+    if(!d||!d.length) return;
+    allData=d;
+    initUI();
+    toast(`Dados restaurados: ${d.length.toLocaleString('pt-BR')} registros`,'ok');
+  }catch(e){localStorage.removeItem(SK);}
+}
+loadStorage();
+</script>
+</body>
+</html>
