@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Clientes Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 [data-theme="dark"]{--bg:#0b0d12;--surface:#13151d;--card:#181c27;--card2:#1e2233;--border:#252b3b;--border2:#2e364d;--text:#e8ecf4;--text2:#9aa3be;--text3:#5a6380;--shadow:rgba(0,0,0,.5);}
 [data-theme="light"]{--bg:#eef1f8;--surface:#ffffff;--card:#ffffff;--card2:#f4f6fc;--border:#dde3f0;--border2:#c8d0e8;--text:#1a1e2e;--text2:#4a5272;--text3:#8891b0;--shadow:rgba(0,0,0,.1);}
@@ -14,43 +14,39 @@
 [data-color="mint"]{--a:#2dcb91;--abg:rgba(45,203,145,.12);--a2:#2db8d4;--a2bg:rgba(45,184,212,.12);--w:#f5a623;--wbg:rgba(245,166,35,.12);--d:#f05c6e;--dbg:rgba(240,92,110,.12);--grad:linear-gradient(135deg,#2dcb91,#2db8d4);}
 [data-color="rose"]{--a:#e056b8;--abg:rgba(224,86,184,.12);--a2:#9b6cf5;--a2bg:rgba(155,108,245,.12);--w:#f5a623;--wbg:rgba(245,166,35,.12);--d:#f05c6e;--dbg:rgba(240,92,110,.12);--grad:linear-gradient(135deg,#e056b8,#9b6cf5);}
 [data-color="slate"]{--a:#64748b;--abg:rgba(100,116,139,.12);--a2:#94a3b8;--a2bg:rgba(148,163,184,.12);--w:#f59e0b;--wbg:rgba(245,158,11,.12);--d:#ef4444;--dbg:rgba(239,68,68,.12);--grad:linear-gradient(135deg,#64748b,#94a3b8);}
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;font-size:14px;line-height:1.5;overscroll-behavior:none;transition:background .3s,color .3s;}
-
-/* TOP BAR */
-.topbar{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 12px var(--shadow);padding:12px 16px;transition:background .3s,border-color .3s;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;font-size:14px;line-height:1.5;overscroll-behavior:none;transition:background .3s,color .3s;padding-bottom:70px;}
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 12px var(--shadow);padding:12px 16px;transition:background .3s;}
 .topbar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{width:34px;height:34px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
 .logo-text{font-size:.9rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;}
-.logo-text small{display:block;font-size:.65rem;font-weight:400;color:var(--text2);letter-spacing:.01em;}
+.logo-text small{display:block;font-size:.65rem;font-weight:400;color:var(--text2);}
 .topbar-actions{display:flex;align-items:center;gap:6px;}
-.icon-btn{width:34px;height:34px;border-radius:9px;background:var(--card2);border:1px solid var(--border);color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;position:relative;}
-.icon-btn:active{transform:scale(.92);background:var(--border);}
-.icon-btn.active{background:var(--abg);border-color:var(--a);color:var(--a);}
+.icon-btn{width:34px;height:34px;border-radius:9px;background:var(--card2);border:1px solid var(--border);color:var(--text2);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.icon-btn:active{transform:scale(.9);}
+.icon-btn.active{background:var(--abg);border-color:var(--a);}
 .search-wrap{position:relative;}
-.search-wrap .s-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.9rem;pointer-events:none;}
-#searchInput{width:100%;padding:10px 36px 10px 36px;background:var(--card2);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;outline:none;transition:border .2s,background .3s;}
-#searchInput:focus{border-color:var(--a);background:var(--card);}
+.s-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;}
+#searchInput{width:100%;padding:10px 36px;background:var(--card2);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;outline:none;transition:border .2s;}
+#searchInput:focus{border-color:var(--a);}
 #searchInput::placeholder{color:var(--text3);}
 .s-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--border2);border:none;color:var(--text2);width:20px;height:20px;border-radius:50%;font-size:.65rem;cursor:pointer;display:none;align-items:center;justify-content:center;font-weight:700;}
 .s-clear.on{display:flex;}
-
 /* PILLS */
 .pills-bar{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;scrollbar-width:none;background:var(--surface);border-bottom:1px solid var(--border);}
 .pills-bar::-webkit-scrollbar{display:none;}
-.pill{padding:5px 13px;border-radius:20px;white-space:nowrap;font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--card2);color:var(--text2);transition:all .15s;flex-shrink:0;}
+.pill{padding:5px 14px;border-radius:20px;white-space:nowrap;font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--card2);color:var(--text2);transition:all .15s;flex-shrink:0;}
 .pill.p-all.on{background:var(--abg);border-color:var(--a);color:var(--a);}
 .pill.p-ativ.on{background:var(--a2bg);border-color:var(--a2);color:var(--a2);}
 .pill.p-inat.on{background:var(--dbg);border-color:var(--d);color:var(--d);}
-
 /* THEME PANEL */
 .theme-panel{position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;width:210px;box-shadow:0 8px 32px var(--shadow);z-index:300;opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;transition:all .18s;}
 .theme-panel.open{opacity:1;transform:none;pointer-events:auto;}
 .tp-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:8px;}
 .color-row{display:flex;justify-content:space-between;margin-bottom:12px;}
-.cdot{width:30px;height:30px;border-radius:8px;cursor:pointer;border:2.5px solid transparent;transition:transform .15s,border-color .15s;display:flex;align-items:center;justify-content:center;}
+.cdot{width:30px;height:30px;border-radius:8px;cursor:pointer;border:2.5px solid transparent;transition:transform .15s,border-color .15s;}
 .cdot:active{transform:scale(.88);}
 .cdot.sel{border-color:var(--text);}
 .cdot.c-ocean{background:linear-gradient(135deg,#3d8ef0,#34d1a0);}
@@ -64,7 +60,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .sw::after{content:'';position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.3);}
 [data-theme="light"] .sw{background:var(--a);}
 [data-theme="light"] .sw::after{transform:translateX(17px);}
-
 /* ADV FILTERS */
 .adv-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;cursor:pointer;font-size:.78rem;color:var(--text2);border-bottom:1px solid var(--border);background:var(--bg);user-select:none;}
 .adv-badge{background:var(--a);color:#fff;border-radius:10px;padding:1px 7px;font-size:.65rem;font-weight:700;display:none;margin-left:4px;}
@@ -74,8 +69,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .adv-inner{padding:12px 16px;display:flex;flex-direction:column;gap:10px;}
 .sel-wrap{position:relative;}
 .sel-wrap::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.7rem;pointer-events:none;}
-select.asel{width:100%;padding:9px 28px 9px 12px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;outline:none;appearance:none;transition:border .2s;}
-select.asel:focus{border-color:var(--a);}
+select.asel,.asel{width:100%;padding:9px 28px 9px 12px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;outline:none;appearance:none;transition:border .2s;}
+select.asel:focus,.asel:focus{border-color:var(--a);}
 .range-wrap{display:flex;flex-direction:column;gap:6px;}
 .range-head{display:flex;justify-content:space-between;align-items:center;}
 .range-head span{font-size:.75rem;color:var(--text2);}
@@ -83,39 +78,31 @@ select.asel:focus{border-color:var(--a);}
 input[type="range"]{width:100%;accent-color:var(--a);cursor:pointer;height:4px;}
 .adv-clear-btn{padding:8px 12px;text-align:center;color:var(--d);font-size:.78rem;font-weight:600;border:1.5px dashed var(--dbg);border-radius:10px;cursor:pointer;transition:background .2s;}
 .adv-clear-btn:active{background:var(--dbg);}
-
-/* STATS BAR */
+/* STATS */
 .stats-bar{display:flex;align-items:center;justify-content:space-between;padding:7px 16px;border-bottom:1px solid var(--border);background:var(--bg);}
 .stats-n{font-size:.95rem;font-weight:800;color:var(--a);font-family:'JetBrains Mono',monospace;}
 .stats-label{font-size:.72rem;color:var(--text3);margin-left:4px;}
 .stats-total{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--w);}
-
 /* UPLOAD */
-.upload-zone{margin:10px 16px;border:2px dashed var(--border2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.78rem;color:var(--text3);transition:border-color .2s,color .2s;background:var(--card2);}
-.upload-zone:active,.upload-zone.over{border-color:var(--a);color:var(--a);}
-.upload-zone input{display:none;}
-
+.upload-zone{margin:10px 16px;border:2px dashed var(--border2);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.78rem;color:var(--text3);transition:border-color .2s;background:var(--card2);}
+.upload-zone:active{border-color:var(--a);color:var(--a);}
 /* CARDS */
-#results{padding:10px 16px 90px;display:flex;flex-direction:column;gap:8px;}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s,background .3s;}
-.card:active{border-color:var(--a);box-shadow:0 0 0 3px var(--abg);}
+#results{padding:10px 16px 10px;display:flex;flex-direction:column;gap:8px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
-.card{animation:fadeUp .2s ease both;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeUp .2s ease both;transition:border-color .2s,background .3s;}
+.card:active{border-color:var(--a);box-shadow:0 0 0 3px var(--abg);}
 .card-bar{height:3px;background:var(--grad);}
 .card.inativo .card-bar{background:linear-gradient(90deg,var(--d),#f09640);}
-
-/* card head */
 .card-head{padding:12px 14px 0;display:flex;align-items:flex-start;gap:10px;}
-.card-av{width:38px;height:38px;border-radius:11px;background:var(--abg);color:var(--a);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0;letter-spacing:-.02em;border:1.5px solid var(--abg);}
-.card.inativo .card-av{background:var(--dbg);color:var(--d);border-color:var(--dbg);}
+.card-av{width:38px;height:38px;border-radius:11px;background:var(--abg);color:var(--a);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:800;flex-shrink:0;}
+.card-av.small{width:32px;height:32px;border-radius:9px;font-size:.72rem;}
+.card.inativo .card-av{background:var(--dbg);color:var(--d);}
 .card-head-info{flex:1;min-width:0;}
 .card-fantasia{font-size:.92rem;font-weight:700;line-height:1.25;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .card-cod{font-size:.67rem;color:var(--text3);margin-top:2px;font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .stag{padding:3px 9px;border-radius:20px;flex-shrink:0;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:1px;}
 .stag.ativo{background:var(--a2bg);color:var(--a2);}
 .stag.inativo{background:var(--dbg);color:var(--d);}
-
-/* card fields */
 .card-fields{padding:10px 14px 8px;display:flex;flex-direction:column;gap:6px;}
 .cf{display:flex;align-items:flex-start;gap:8px;font-size:.78rem;line-height:1.4;}
 .cf-ic{width:22px;height:22px;border-radius:6px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;margin-top:1px;border:1px solid var(--border);}
@@ -123,551 +110,1266 @@ input[type="range"]{width:100%;accent-color:var(--a);cursor:pointer;height:4px;}
 .cf-lbl{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:1px;}
 .cf-val{color:var(--text);font-weight:500;display:block;}
 .cf-val.mono{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
 .card-div{height:1px;background:var(--border);margin:0 14px;}
-
-/* card footer */
 .card-foot{padding:9px 14px;display:flex;align-items:center;justify-content:space-between;}
 .lim-lbl{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;}
 .lim-val{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;margin-top:1px;}
-.lim-val.v0{color:var(--text3);}
-.lim-val.vl{color:var(--w);}
-.lim-val.vh{color:var(--a2);}
+.lim-val.v0{color:var(--text3);}.lim-val.vl{color:var(--w);}.lim-val.vh{color:var(--a2);}
+mark{background:var(--wbg);color:var(--w);border-radius:3px;padding:0 2px;font-weight:600;}
+/* BUTTONS */
 .act-btn{padding:6px 12px;border-radius:8px;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s;border:1.5px solid var(--border);background:var(--card2);color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;}
 .act-btn:active{background:var(--border2);}
 .act-btn.primary{background:var(--abg);border-color:var(--a);color:var(--a);}
 .act-btn.primary:active{background:var(--a);color:#fff;}
-
-mark{background:var(--wbg);color:var(--w);border-radius:3px;padding:0 2px;font-weight:600;}
-.empty{text-align:center;padding:60px 20px;color:var(--text3);}
+.btn-primary{width:100%;padding:12px;background:var(--grad);border:none;border-radius:12px;color:#fff;font-weight:700;font-size:.9rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:opacity .15s;}
+.btn-primary:active{opacity:.85;}
+.btn-secondary{padding:10px 16px;background:var(--card2);border:1.5px solid var(--border);border-radius:10px;color:var(--text2);font-weight:600;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .15s;}
+.btn-secondary:active{background:var(--border);}
+.btn-danger{padding:10px 16px;background:var(--dbg);border:1.5px solid var(--d);border-radius:10px;color:var(--d);font-weight:600;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;}
+/* PAGE LAYOUT */
+.page-header{padding:16px 16px 0;background:var(--surface);border-bottom:1px solid var(--border);padding-bottom:12px;position:sticky;top:0;z-index:100;}
+.page-header h2{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;}
+.page-sub{font-size:.75rem;color:var(--text2);margin-top:2px;}
+.back-btn{background:none;border:none;color:var(--a);font-size:.78rem;font-weight:600;cursor:pointer;padding:0;margin-bottom:6px;font-family:'Plus Jakarta Sans',sans-serif;}
+.page-body{padding:12px 16px;display:flex;flex-direction:column;gap:12px;}
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;}
+.form-section-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:12px;}
+.form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;}
+.form-label{font-size:.75rem;font-weight:600;color:var(--text2);}
+/* NAV BAR */
+.navbar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);display:flex;z-index:150;padding-bottom:env(safe-area-inset-bottom);}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;background:none;border:none;color:var(--text3);font-size:.6rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;position:relative;gap:3px;transition:color .15s;}
+.nav-btn.active{color:var(--a);}
+.nav-btn .ni{font-size:1.3rem;line-height:1;}
+.nav-badge{position:absolute;top:4px;right:calc(50% - 16px);background:var(--d);color:#fff;border-radius:10px;padding:0 5px;font-size:.58rem;font-weight:800;display:none;}
+/* JOGO */
+.jogo-header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px;}
+.jogo-cidade{font-size:1rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+.mix-item{margin-bottom:8px;}
+.mix-head{display:flex;justify-content:space-between;font-size:.75rem;font-weight:600;margin-bottom:4px;}
+.mix-bar-bg{height:5px;background:var(--border2);border-radius:3px;overflow:hidden;}
+.mix-bar-fill{height:100%;border-radius:3px;transition:width .4s ease;}
+.jogo-stats-row{display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.js-pill{padding:4px 10px;background:var(--card2);border:1px solid var(--border);border-radius:20px;font-size:.72rem;color:var(--text2);}
+.js-end{margin-left:auto;padding:6px 14px;background:var(--dbg);border:1.5px solid var(--d);border-radius:20px;color:var(--d);font-size:.72rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;}
+.jogo-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface);}
+.jtab{flex:1;padding:10px;background:none;border:none;color:var(--text3);font-size:.78rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;border-bottom:2px solid transparent;transition:all .15s;}
+.jtab.on{color:var(--a);border-bottom-color:var(--a);}
+#jogoLista{padding:10px 16px;display:flex;flex-direction:column;gap:8px;}
+.jcard{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.jcard.visited{opacity:.55;}
+.jcard-head{padding:12px;display:flex;align-items:center;gap:10px;}
+.jcard-nome{font-size:.88rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.jcard-end{font-size:.7rem;color:var(--text3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.jcard-lim{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--w);flex-shrink:0;font-weight:700;}
+.jcard-actions{display:flex;gap:6px;padding:0 12px 12px;}
+.jbtn{flex:1;padding:8px 4px;border-radius:10px;font-size:.72rem;font-weight:700;cursor:pointer;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:opacity .15s;}
+.jbtn:active{opacity:.7;}
+.jbtn.verde{background:#1a3f29;color:#34d1a0;}
+.jbtn.azul{background:var(--abg);color:var(--a);}
+.jbtn.cinza{background:var(--card2);color:var(--text3);}
+.bairro-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.bairro-chip{padding:6px 12px;border-radius:20px;background:var(--card2);border:1.5px solid var(--border);font-size:.75rem;cursor:pointer;transition:all .15s;}
+.bairro-chip.sel{background:var(--abg);border-color:var(--a);color:var(--a);}
+.jogo-preview{display:flex;justify-content:center;padding:12px 0;}
+.jp-stat{text-align:center;}
+.jp-stat span{display:block;font-size:2rem;font-weight:800;color:var(--a);font-family:'JetBrains Mono',monospace;}
+.jp-stat small{font-size:.72rem;color:var(--text3);}
+/* VENDA */
+.venda-item{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.mini-input{padding:8px 10px;background:var(--card2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;outline:none;width:70px;text-align:center;}
+.mini-input:focus{border-color:var(--a);}
+.del-btn{background:var(--dbg);border:none;color:var(--d);width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:.8rem;flex-shrink:0;}
+.venda-total-wrap{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--border);margin-bottom:10px;}
+.venda-total{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--a2);font-weight:700;}
+/* AGENDA */
+.agenda-group{margin-bottom:16px;}
+.agenda-group-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.agenda-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;}
+.agenda-card-head{display:flex;align-items:center;justify-content:space-between;}
+.agenda-nome{font-size:.88rem;font-weight:700;}
+.agenda-data{font-size:.72rem;font-weight:600;margin-top:2px;}
+.agenda-obs{font-size:.75rem;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+/* CONFIG */
+.prod-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);}
+.prod-item:last-child{border-bottom:none;}
+.prod-nome{font-size:.82rem;font-weight:600;}
+.add-prod-row{display:flex;align-items:center;gap:6px;margin-top:10px;}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:flex;align-items:flex-end;justify-content:center;}
+.modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 16px 30px;width:100%;max-width:500px;}
+.modal-title{font-size:1rem;font-weight:800;margin-bottom:14px;}
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(6px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:9px 18px;border-radius:20px;font-size:.8rem;font-weight:600;opacity:0;transition:all .2s;pointer-events:none;z-index:600;white-space:nowrap;box-shadow:0 4px 20px var(--shadow);}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+/* EMPTY */
+.empty{text-align:center;padding:50px 20px;color:var(--text3);}
 .empty-emoji{font-size:3rem;margin-bottom:12px;}
 .empty h3{font-size:1rem;font-weight:700;color:var(--text2);margin-bottom:6px;}
 .empty p{font-size:.8rem;}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(6px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:9px 18px;border-radius:20px;font-size:.8rem;font-weight:600;opacity:0;transition:all .2s;pointer-events:none;z-index:400;white-space:nowrap;box-shadow:0 4px 20px var(--shadow);}
-.toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
-.fab{position:fixed;bottom:16px;right:16px;width:48px;height:48px;background:var(--grad);border:none;border-radius:50%;color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px var(--shadow);transition:transform .15s;}
-.fab:active{transform:scale(.9);}
+
+/* JOGO NOVOS ESTILOS */
+.jogo-top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.jogo-search-bar{position:relative;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);}
+.jogo-search-bar input{width:100%;padding:9px 10px 9px 34px;background:var(--card2);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;outline:none;transition:border .2s;}
+.jogo-search-bar input:focus{border-color:var(--a);}
+.jogo-search-bar .s-icon{position:absolute;left:28px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3);}
+.jbairro-bar{display:flex;gap:6px;overflow-x:auto;padding:6px 16px;background:var(--surface);border-bottom:1px solid var(--border);scrollbar-width:none;}
+.jbairro-bar::-webkit-scrollbar{display:none;}
+.jbairro-pill{padding:4px 12px;border-radius:20px;white-space:nowrap;font-size:.72rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--card2);color:var(--text2);transition:all .15s;flex-shrink:0;}
+.jbairro-pill.on{background:var(--abg);border-color:var(--a);color:var(--a);}
+.jogo-bairro-sep{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 4px;}
+.jogo-bairro-nome{font-size:.75rem;font-weight:700;color:var(--a);}
+.jogo-bairro-count{font-size:.68rem;color:var(--text3);background:var(--card2);padding:2px 8px;border-radius:10px;}
+/* JCARD EXPAND */
+.jcard-expand{border-top:1px solid var(--border);padding:12px;}
+.jcard-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.jinfo{display:flex;flex-direction:column;gap:3px;}
+.jinfo-full{grid-column:1/-1;}
+.jinfo-lbl{font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);font-weight:700;}
+.jinfo-val{font-size:.78rem;color:var(--text);font-weight:500;}
+.jinfo-val.mono{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text2);}
+.jinfo-edit{width:100%;padding:7px 10px;background:var(--card2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;outline:none;transition:border .2s;}
+.jinfo-edit:focus{border-color:var(--a);}
+.jcard-tel{font-size:.7rem;color:var(--a);margin-top:2px;}
+.wa-btn{padding:5px 10px;background:#25D366;color:#fff;border-radius:8px;font-size:.72rem;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+/* ONBOARDING */
+.onboarding{text-align:center;}
+.ob-logo{font-size:3rem;margin-bottom:8px;}
+.ob-title{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;margin-bottom:6px;line-height:1.3;}
+.ob-sub{font-size:.8rem;color:var(--text2);margin-bottom:18px;}
+.ob-steps{text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:20px;background:var(--card2);border-radius:12px;padding:12px;}
+.ob-step{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--text2);}
+.ob-n{width:22px;height:22px;border-radius:50%;background:var(--grad);color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* inativo no avatar jcard */
+.card-av.inativo{background:var(--dbg);color:var(--d);}
+
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-head">
-    <div class="logo">
-      <div class="logo-icon">📋</div>
-      <div class="logo-text">Clientes Pro<small>Filtro inteligente</small></div>
-    </div>
-    <div class="topbar-actions">
-      <label class="icon-btn" title="Carregar XLSX" style="cursor:pointer">
-        📂<input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none" onchange="handleFile(this.files[0])">
-      </label>
-      <div style="position:relative">
-        <button class="icon-btn" id="themeBtn" onclick="toggleTP()" title="Temas">🎨</button>
-        <div class="theme-panel" id="themePanel">
-          <div class="tp-label">Cor do tema</div>
-          <div class="color-row">
-            <div class="cdot c-ocean sel" data-c="ocean"  onclick="setColor('ocean',this)"></div>
-            <div class="cdot c-sunset"    data-c="sunset" onclick="setColor('sunset',this)"></div>
-            <div class="cdot c-mint"      data-c="mint"   onclick="setColor('mint',this)"></div>
-            <div class="cdot c-rose"      data-c="rose"   onclick="setColor('rose',this)"></div>
-            <div class="cdot c-slate"     data-c="slate"  onclick="setColor('slate',this)"></div>
-          </div>
-          <div class="toggle-row">
-            <span class="toggle-label" id="themeLabel">🌙 Modo escuro</span>
-            <div class="sw" onclick="toggleDark()"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="search-wrap">
-    <span class="s-icon">🔍</span>
-    <input id="searchInput" type="search" placeholder="Buscar nome, bairro, endereço, cidade…" autocomplete="off" autocorrect="off" spellcheck="false">
-    <button class="s-clear" id="sClear" onclick="clearSearch()">✕</button>
-  </div>
-</div>
+<div id="app"></div>
 
-<div class="pills-bar">
-  <button class="pill p-all on" data-s="all"     onclick="setStatus('all',this)">Todos</button>
-  <button class="pill p-ativ"   data-s="ATIVO"   onclick="setStatus('ATIVO',this)">✅ Ativo</button>
-  <button class="pill p-inat"   data-s="INATIVO" onclick="setStatus('INATIVO',this)">🔴 Inativo</button>
-</div>
+<nav class="navbar">
+  <button class="nav-btn" data-tela="lista" onclick="UI.ir('lista')">
+    <span class="ni">📋</span>Clientes
+  </button>
+  <button class="nav-btn" data-tela="jogo" onclick="UI.ir('jogo')">
+    <span class="ni">🎮</span>Rota
+    <span class="nav-badge" id="jogoBadge">●</span>
+  </button>
+  <button class="nav-btn" data-tela="agenda" onclick="UI.ir('agenda')">
+    <span class="ni">📅</span>Agenda
+    <span class="nav-badge" id="agendaBadge">0</span>
+  </button>
+  <button class="nav-btn" data-tela="cadastro" onclick="UI.ir('cadastro')">
+    <span class="ni">➕</span>Novo
+  </button>
+  <button class="nav-btn" data-tela="config" onclick="UI.ir('config')">
+    <span class="ni">⚙️</span>Config
+  </button>
+</nav>
 
-<div class="adv-header" onclick="toggleAdv()">
-  <span>⚙️ Filtros avançados <span class="adv-badge" id="advBadge">0</span></span>
-  <span id="advArr">▼</span>
-</div>
-<div class="adv-body" id="advBody">
-  <div class="adv-inner">
-    <div class="sel-wrap">
-      <select class="asel" id="cidadeSel" onchange="onCidadeChange()">
-        <option value="">🏙️ Todas as cidades</option>
-      </select>
-    </div>
-    <div class="sel-wrap">
-      <select class="asel" id="bairroSel" onchange="applyFilters()">
-        <option value="">📍 Todos os bairros</option>
-      </select>
-    </div>
-    <div class="range-wrap">
-      <div class="range-head">
-        <span>💰 Limite mínimo de crédito</span>
-        <strong id="limDisp">R$ 0</strong>
-      </div>
-      <input type="range" id="limRange" min="0" max="1502200" step="1000" value="0"
-             oninput="onRange(this.value)" onchange="applyFilters()">
-    </div>
-    <div class="sel-wrap">
-      <select class="asel" id="sortSel" onchange="applyFilters()">
-        <option value="">📶 Ordem padrão</option>
-        <option value="fantasia">🔤 Nome A → Z</option>
-        <option value="limite_d">💰 Maior limite primeiro</option>
-        <option value="limite_a">💸 Menor limite primeiro</option>
-        <option value="cidade">🏙️ Por cidade</option>
-        <option value="bairro">📍 Por bairro</option>
-      </select>
-    </div>
-    <div class="adv-clear-btn" onclick="clearAll()">🗑️ Limpar todos os filtros</div>
-  </div>
-</div>
-
-<div class="stats-bar">
-  <div><span class="stats-n" id="statsN">0</span><span class="stats-label">clientes encontrados</span></div>
-  <span class="stats-total" id="statsTotal"></span>
-</div>
-
-<div class="upload-zone" id="upZone"
-     onclick="document.getElementById('fileInput').click()"
-     ondragover="this.classList.add('over');event.preventDefault()"
-     ondragleave="this.classList.remove('over')"
-     ondrop="handleDrop(event)">
-  <span style="font-size:1.2rem">📂</span>
-  <span id="upLabel">Carregar novo arquivo .xlsx — arraste ou toque aqui</span>
-</div>
-
-<div id="results"></div>
-<button class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="toast" id="toast"></div>
 
 <script>
 window.__DATA__ = [{"cidade": "329 - PARNAIBA", "bairro": "13303 - DIRCEU ARCOVERDE", "endereco": "QD E 24 CJ PORTAL DOS VENTOS", "cliente": "3406765 - 55 029 877 WANDERKLEY SANTOS DA SILVA ME", "fantasia": "55 029 877 WANDERKLEY SANTOS DA SILVA ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "14636 - FREI HIGINO", "endereco": "RUA D,", "cliente": "1367071 - M FRANCISCA DOS SANTOS SILVA ME", "fantasia": "***********", "limite": 35000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "14636 - FREI HIGINO", "endereco": "AV S O SEBASTI O 2960 LJ 01 ANEX", "cliente": "3390884 - IDEAL CONVENIENCIA LTDA ME", "fantasia": "IDEAL CONVENIENCIA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "14814 - PLANALTO DE MONTESERRA THE", "endereco": "AV DR JOAO SILVA FILHO", "cliente": "1148406 - R N MACHADO COMERCIO ME", "fantasia": "MERCADINHO O DIM", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "14814 - PLANALTO DE MONTESERRA THE", "endereco": "AV GENERAL JOAO BATISTA FIGUEIREDO", "cliente": "1977643 - DOUGLAS E SILVA LTDA", "fantasia": "DOUGLAS E SILVA LTDA", "limite": 120000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16294 - PRIMAVERA", "endereco": "R RAIMUNDO LUCAS DE OLIVEIRA", "cliente": "313994 - 35.421.529 JULIANO MACHADO VERAS", "fantasia": "MERCANTIL BRODER", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16294 - PRIMAVERA", "endereco": "R D PEDRO I", "cliente": "877384 - FRANCISCO EDNARDO VERAS TEIXEIRA ME", "fantasia": "MERCADINHO VERAS", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16294 - PRIMAVERA", "endereco": "RUA DEPUTADO RIBEIRO MAGALHAES", "cliente": "1813360 - F DAS CHAGAS C DE ANDRADE", "fantasia": "MERCANTIL ANDRADE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16294 - PRIMAVERA", "endereco": "QD N 1 15 CJ RESIDL D RUFINO IIQUAD", "cliente": "2303026 - D P DA COSTA ME", "fantasia": "D P DA COSTA ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16294 - PRIMAVERA", "endereco": "R ANTONIO SALES DE SOUSA 36 QD", "cliente": "3284348 - 53 593 723 ANTONIO JOSE DE ARAUJO COSTA ME", "fantasia": "53 593 723 ANTONIO JOSE DE ARAUJO COSTA ME", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16341 - SAO JUDAS TADEU", "endereco": "AV LEONARDO DE CARVALHO CASTELO BRANCO 6065 LJ CONVENIENCIA", "cliente": "3495964 - F F DA COSTA JUNIOR LTDA ME", "fantasia": "ROTA 343", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "16725 - M DA UNIVERSIDADE", "endereco": "RUA MADRE SAVINA PETRILLI N 380", "cliente": "1572021 - LOURIVAL BATISTA DE AZEVEDO FILHO", "fantasia": "LOURIVAL BATISTA DE AZEVEDO FI", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "MONSENHOR ANTONIO SAMPAIO", "cliente": "116630 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "AVE MONSENHOR ANTONIO SAMPAIO", "cliente": "1315261 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "AVE MONSENHOR ANTONIO SAMPAIO", "cliente": "2556218 - F J SILVA DOS SANTOS MINIMERCADOS", "fantasia": "MERCANTIL LINO", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "AV MNS ANTONIO SAMPAIO 2720 GALPAO", "cliente": "2812585 - TOUREIRO ATACADISTA LTDA", "fantasia": "TOUREIRO ATACADISTA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "MONSENHOR ANTONIO SAMPAIO", "cliente": "2837288 - TOUREIRO ATACAREJO LTDA", "fantasia": "TOUREIRO ATACAREJO LTDA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "AV MONSENHOR ANTONIO SAMPAIO", "cliente": "3599699 - FARMACIAS TOUREIROFARMA LTDA", "fantasia": "FARMACIAS TOUREIROFARMA LTDA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "17334 - ALTO SANTA MARIA", "endereco": "AV MNS ANTONIO SAMPAIO 2472 LJ A", "cliente": "3986934 - COMERCIAL SAMPAIO LTDA EPP", "fantasia": "COMERCIAL SAMPAIO", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "22563 - NOSSA SENHORA DE FATIMA", "endereco": "R MADEIRA BRANDAO", "cliente": "3102675 - F GOMES ALVES", "fantasia": "F GOMES ALVES", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "22563 - NOSSA SENHORA DE FATIMA", "endereco": "R MAL PIRES FERREIRA", "cliente": "3468785 - L M C DUTRA RIBEIRO ME", "fantasia": "COMERCIAL MANIA", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "22563 - NOSSA SENHORA DE FATIMA", "endereco": "R SERGIPE", "cliente": "3866378 - JOANA CRISTINA LIMA DA SILVA 04197169396", "fantasia": "CANTO DO SABOR", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "35702 - CONSELHEIRO ALBERTO", "endereco": "R VEREADOR ARIMATEIA CARVALHO NÂ° 4983", "cliente": "1952151 - FRANCISCO DIUNIZIO DE FARIAS FILHO", "fantasia": "COMERCIAL FARIAS", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "35702 - CONSELHEIRO ALBERTO", "endereco": "QD D 4 1 CJ SIMPLICIO DIAS", "cliente": "3916106 - E BRITO DOS SANTOS COMERCIAL NOVA FONTE PHB ME", "fantasia": "COMERCIAL NOVA FONTE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "38793 - SAO FRANCISCO DA GUARITA", "endereco": "R PRUDENTE DE MORAES 1466", "cliente": "1964162 - MARIA DAS GRACAS DE SOUZA GALENO MEE", "fantasia": "COMERCIAL J SOUSA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9096 - AMERICA", "endereco": "RUA TABAJARA,N.1481,BAIRRO DE FATIMA", "cliente": "31987 - M C DE FREITAS MORAIS", "fantasia": "MARCELO VARIEDADES", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9098 - BEBEDOURO", "endereco": "RUA SAO PEDRO,295 - BEBEDOURO", "cliente": "76654 - R OLIVEIRA MACHADO MEE", "fantasia": "MERCANTIL E ABATEDOURA GUARITA", "limite": 17000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9098 - BEBEDOURO", "endereco": "R OEIRAS", "cliente": "3818348 - 59 408 205 JULIANA CHAVES NASCIMENTO ME", "fantasia": "59 408 205 JULIANA CHAVES NASCIMENTO ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "R CARAMURU", "cliente": "23407 - M L SAMPAIO DA SILVEIRA ME", "fantasia": "CARAMURU COMERCIO E SERVICOS", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "RUA CARAMURU,1366 - BOA ESPERANCA", "cliente": "76908 - MARIA DE SOUSA B OLIVEIRA MEE", "fantasia": "H L VARIEDADES", "limite": 3000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "RUA MELVIN JONES NAAAAº836", "cliente": "466862 - C C DOS SANTOS MERCEARIA", "fantasia": "C C DOS SANTOS MERCEARIA", "limite": 120000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "RUA AFOSO PENA 1799", "cliente": "1509154 - FRANCISCO DOMINICIO ALVES DA MOTA", "fantasia": "FRANCISCO DOMINICIO ALVES DA MOTA", "limite": 57000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "RUA CEARA  134", "cliente": "1890076 - DEUZIMAR MARIA DE SOUSA 83984704372", "fantasia": "MERCEARIA SANTO ANTONIO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "CJ BOA ESPERANCA II", "cliente": "1964171 - A A A DE ANDRADE", "fantasia": "MERCANTIL RR FRANGOS", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9099 - BOA ESPERANCA", "endereco": "AV DEPUTADO PINHEIRO MACHADO", "cliente": "3392987 - 54.451.486 FRANCISCA JORDANIA DA CONCEICAO SILVA", "fantasia": "54.451.486 FRANCISCA JORDANIA DA CONCEICAO SILVA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9102 - CEARA", "endereco": "RUA SAO FRANCISCO TERREO 01", "cliente": "120233 - M DE F F DAMASCENO", "fantasia": "COMERCIAL AGUA BRANCA", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9102 - CEARA", "endereco": "RUA A CASA 115", "cliente": "2180543 - BERNARDO PEREIRA COSTA MEE", "fantasia": "COMERCIAL BERNARDO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9102 - CEARA", "endereco": "R DELBAO RODRIGUES 550 ANEXO I", "cliente": "3590993 - REGINA CELIA FERNANDES LIMA 38712075353", "fantasia": "MERCADINHO REGINA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9102 - CEARA", "endereco": "CJ JARDIM ESPERANCA III", "cliente": "3946350 - 61 278 254 RAYCA AGLAE SILVA MELO ME", "fantasia": "61 278 254 RAYCA AGLAE SILVA MELO ME", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "R DR. FRANCISCO CORREIA", "cliente": "19628 - ARMAZEM ASTROGILDO LTDA", "fantasia": "ARMAZEM ASTROGILDO LTDA", "limite": 160000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "R MQ DO HERVAL", "cliente": "26349 - FRANCISCO DE ASSIS CARVALHO COSMETICOS ME", "fantasia": "FRANCISCO DE ASSIS CARVALHO COSMETICOS ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "CENTRO COMERCIAL BOX 03, CENTRO", "cliente": "29606 - ZENON RODRIGUES SANTOS ME", "fantasia": "MINI BOX CENTRAL N.03", "limite": 75000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "R FRANCISCO CORREIA", "cliente": "30281 - F D M MACHADO ME", "fantasia": "F D M MACHADO ME", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "PC CONSTANTINO CORREA,938 - CENTRO", "cliente": "47317 - FLAVIO LOPES CARVALHO MEE", "fantasia": "MERCADINHO NICOLAU FILHO", "limite": 16000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "RUA PEDRO II,992 - CENTRO", "cliente": "74561 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "AV PRES GETULIO VARGAS,165 - CENTRO", "cliente": "74565 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "HUMBERTO DE CAMPOS", "cliente": "470236 - SUPERMERCADO IDEAL LTDA", "fantasia": "SUPERMERCADO IDEAL LTDA", "limite": 100000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "PEDRO II", "cliente": "2825062 - TOUREIRO ATACAREJO LTDA", "fantasia": "TOUREIRO ATACAREJO LTDA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9103 - CENTRO", "endereco": "R PEDRO II", "cliente": "3599627 - FARMACIAS TOUREIROFARMA LTDA", "fantasia": "TOUREIROFARMA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9110 - JOAO XXIII", "endereco": "RUA MARIA ELITA ARAUJO N 690", "cliente": "1624703 - A ALMEIDA DOS SANTOS MINIMERCADO ME", "fantasia": "MERCEARIA BEIJA FLOR", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9110 - JOAO XXIII", "endereco": "R SAO JOAO BATISTA 685", "cliente": "1892313 - MARIA DAS NEVES DA SILVA PANTOJA 38711974320", "fantasia": "COMERCIAL NN", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9110 - JOAO XXIII", "endereco": "AV GILBERTO PEREIRA DE SOUZA (COMUNIDADE PORTINHO)", "cliente": "2649512 - MARIA CILENE GALVAO MONTEIRO 03108599640", "fantasia": "MERCANTIL MONTEIRO - PORTINHO", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9110 - JOAO XXIII", "endereco": "QD G 3 CJ CAM DA ALVORADA 19 C AV", "cliente": "2758127 - MARIA CLECIA FONTENELE DOS SANTOS ME", "fantasia": "MARIA CLECIA FONTENELE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9110 - JOAO XXIII", "endereco": "R ERNESTO PEREIRA VIEIRA PROJ 5 COMUNIDADE PORTINH", "cliente": "2902743 - NELSON AMORIM PEREIRA ME", "fantasia": "MERCADINHO SANTA LUZIA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9110 - JOAO XXIII", "endereco": "RES CAMINHO DA ALVORADA QD G 3", "cliente": "3901713 - CARLOS ANTONIO F DOS SANTOS ME", "fantasia": "MERCANTIL CARLOS AUGUSTO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9113 - NOVA PARNAIBA", "endereco": "TERESINA", "cliente": "74559 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "ELIZEU MARTINS SUPERMERCADOS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9116 - PARQUE PIAUI", "endereco": "R OSVALDO CRUZ", "cliente": "2620723 - MERCANTIL IMPERIO LTDA ME", "fantasia": "MERCANTIL IMPERIO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9116 - PARQUE PIAUI", "endereco": "R OSVALDO CRUZ 2095 AP", "cliente": "2840604 - RAIMUNDO NONATO SILVA BARROS 81495617300", "fantasia": "MERCANTIL PRA VOCE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "RUA ANHANGUERA Nº2775", "cliente": "32009 - MARIO DE ARAUJO GOMES MEE", "fantasia": "MARIO VARIEDADES", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "RUA SANTANA", "cliente": "41608 - DIOCLECIO MACHADO CARDOSO MEE", "fantasia": "MERCANTIL", "limite": 40000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "AV DOUTOR JOAO SILVA FILHO", "cliente": "103010 - MERCANTIL OLIVEIRA LTDA", "fantasia": "MERCANTIL OLIVEIRA", "limite": 100000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "AV DR JOAO SILVA FILHO N 3685", "cliente": "166876 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "RUA VEREADOR ARIMATEIA CARVALHA, 3380", "cliente": "1269519 - M I CRUZ ARAUJO - ME", "fantasia": "********", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "RUA VEREADOR ARIMATEIA DE CARVALHO", "cliente": "1549695 - DOMINGOS CASTRO DE ALMEIDA FILHO", "fantasia": "NENEM MERCADINHO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "AV DOUTOR JOAO SILVA FILHO", "cliente": "1549724 - WILSON & RODRIGUES LTDA ME", "fantasia": "COMERCIAL PLANETA", "limite": 120000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "RUA SANTANA 1970", "cliente": "1569625 - ANTONIO NERES DE BRITO", "fantasia": "**********", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "RUA SANTANA N 1587", "cliente": "1631838 - S K BATISTA DA SILVA ME", "fantasia": "COMERCIAL VERAS", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "R OSVALDO CRUZ", "cliente": "2286158 - MARCO ANTONIO MARQUES VERAS 49675354372", "fantasia": "MERCADINHO MARX", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "AV DEP PINHEIRO MACHADO", "cliente": "3442526 - L C LIMA MINIMERCADO LTDA ME", "fantasia": "COMERCIAL SEMPRE BELLA", "limite": 21000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "R ITAUNA", "cliente": "3549717 - 3549717 - JOHILDA SOUSA DOS ANJOS SILVA 75201615368", "fantasia": "3549717 - JOHILDA SOUSA DOS ANJOS SILVA 75201615368", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9117 - PIAUI", "endereco": "QD E CJ BETANIA II 05 SL", "cliente": "3624762 - R SILVA RODRIGUES", "fantasia": "COMERCIAL BELLA GALENO", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9118 - PINDORAMA", "endereco": "AVE PINHEIRO MACHADO,1000 - PINDORAMA", "cliente": "74564 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9118 - PINDORAMA", "endereco": "CJ BOA ESPERANCA II. CASA", "cliente": "3061023 - L C LIMA MINIMERCADO LTDA ME", "fantasia": "SEMPRE BELLA MIX", "limite": 21000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9118 - PINDORAMA", "endereco": "AV DEPUTADO PINHEIRO MACHADO", "cliente": "3599652 - FARMACIAS TOUREIROFARMA LTDA", "fantasia": "FARMACIAS TOUREIROFARMA LTDA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9118 - PINDORAMA", "endereco": "R TIMBIRAS 934 LETRA A", "cliente": "3730252 - JAILSON DE OLIVEIRA EPP", "fantasia": "JAILSON DE OLIVEIRA EPP", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9120 - REIS VELOSO", "endereco": "AVENIDA PINHEIRO MACHADO  670", "cliente": "78626 - V MACHADO CIA LTDA", "fantasia": "SEM FANTASIA", "limite": 213000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9121 - RODOVIARIA", "endereco": "AV DEP PINHEIRO MACHADO", "cliente": "18808 - FERNANDO SOLON DE AGUIAR LIMA ME", "fantasia": "MERCANTIL O FERNANDO", "limite": 40000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9121 - RODOVIARIA", "endereco": "AVE PERIMETRAL CONTORNO CEARA", "cliente": "78624 - V MACHADO CIA LTDA", "fantasia": "SEM FANTASIA", "limite": 213000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9121 - RODOVIARIA", "endereco": "RUA ARGENTINA N84", "cliente": "1500689 - CLEANE DE SOUSA CALACA ME", "fantasia": "COMERC CLEANE CALACA", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9121 - RODOVIARIA", "endereco": "AV DEPUTADO PINHEIRO MACHADO", "cliente": "1594817 - EULILA DE AGUIAR BRITO LTDA.", "fantasia": "MERCANTIL ERNANI", "limite": 40000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9121 - RODOVIARIA", "endereco": "CEARA", "cliente": "2035060 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9121 - RODOVIARIA", "endereco": "AV DEP PINHEIRO MACHADO", "cliente": "3056342 - MERCANTIL CARLA TELMA LTDA ME", "fantasia": "MERCANTIL E FRIGORIFICO LIDER", "limite": 40000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "CJ JOAZ SOUSA RUA 05 16 CS A QD 24", "cliente": "113095 - ANTONIO PINHO R MINIMERCADO ME", "fantasia": "MERCANTIL AVENIDA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "R JOSE MENDES MOURAO 835", "cliente": "1148249 - G DE AGUIAR COSTA", "fantasia": "COMERCIAL G AGUIAR", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "CJ JOAZ SOUZA Q 01 CASA 01", "cliente": "1892943 - REGINALDO LUSTOSA DE SAMPAIO", "fantasia": "COEMRCIAL REGINALDO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "AVENIDA BATISTA SILVA 2215", "cliente": "1898378 - MARCELO DA S BRITO", "fantasia": "MEGA ECONOMIA", "limite": 180000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "R JOSE MENDES MOURAO", "cliente": "2802011 - 21 594 697 EVANDRO DE OLIVEIRA LEOCADIO ME", "fantasia": "COMERCIAL LEOCADIO", "limite": 80000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "QD 31 CJ JOAZ SOUSA 32 ST R", "cliente": "2862242 - 49 059 467 MARIA DE FATIMA PEREIRA DOS SANTOS ME", "fantasia": "COMERCIAL ATENDE BEM", "limite": 35000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "LOT ROSAPOLIS 1 CJ D RUFINO1 QD B3 CA", "cliente": "3014103 - ANTONIA MARIA DOS SANTOS 06115513308", "fantasia": "MERCADINHO ECONOMIZAR", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "Q 31 SETOR RUA 12 LOJA 02", "cliente": "3077739 - 27.068.025 BILIGAM ALVES PEREIRA", "fantasia": "BILIGAM COMERCIO E REPRESENTACAO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9128 - SAO VICENTE DE PAULA", "endereco": "R JOSE MENDES MOURAO", "cliente": "3284783 - B J XAVIER ME", "fantasia": "COMERCIAL SANTA RITA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9129 - SABIAZAL", "endereco": "LT MORADA DOS VENTOS 1 QUADRA22 BOX", "cliente": "3580436 - G M RODRIGUES ME", "fantasia": "MERCEARIA MORADA DA ECONOMIA", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9130 - SANTA LUZIA", "endereco": "AV JOSE DE MORAES CORREIA", "cliente": "8513 - YNGRED YANKA ALMEIDA TEIXEIRA 05954060339", "fantasia": "Mercadinho veras", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9133 - SAO FRANCISCO", "endereco": "R SAO PEDRO,133,B-SAO FRANCISCO GUARITA", "cliente": "18490 - F A BRITO CARVALHO ME", "fantasia": "MERCEARIA ASSIS BRITO", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9133 - SAO FRANCISCO", "endereco": "R.SAO PEDRO,85,MERC DA GUARITA,B.SAO FCO", "cliente": "32013 - RAIMUNDO NONATO DE SOUSA LIMA", "fantasia": "MERCANTIL O BETO", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9133 - SAO FRANCISCO", "endereco": "RUA CARAMURU,N.380,BAIRRO SAO FRANCISCO", "cliente": "32486 - G C RODRIGUES COMERCIO ME", "fantasia": "MERCADINHO TEM PRECO", "limite": 35000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9133 - SAO FRANCISCO", "endereco": "RUA TABAJARA N 1006", "cliente": "45437 - FRANCISCO DAS CHAGAS L CARVALH", "fantasia": "MERCANTIL CARVALHO", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "329 - PARNAIBA", "bairro": "9133 - SAO FRANCISCO", "endereco": "RUA AFONSO PENA NAAº1851", "cliente": "489202 - MARIANO NERES MACHADO ME", "fantasia": "MERCANTIL MARIANO", "limite": 57000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "33236 - CAMPUS", "endereco": "R ESTRELICIA", "cliente": "2791663 - ULLISSES SOUSA DO NASCIMENTO 03717730320", "fantasia": "MERCANTIL ULLISSES", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "30984 - PEITO DE MOCA", "endereco": "RES BRISAMAR 1 C 1", "cliente": "2911346 - ELISANGELA DA SILVA DIAS ME", "fantasia": "ELISANGELA DA SILVA DIAS ME", "limite": 18000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "30984 - PEITO DE MOCA", "endereco": "CRES BRISAMAR QUADRA Q7", "cliente": "3011327 - 45.117.554 JOELMIR DE SOUZA DOURADO", "fantasia": "MERCADINHO JR", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "21393 - MACAPA", "endereco": "ESTRADA  DO MACAPA", "cliente": "1950082 - RAIANE ASSUNCAO VERAS 06112158370", "fantasia": "Comercio da Mana", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "16508 - BREJINHO", "endereco": "COMUNIDADE PE DA SERRA", "cliente": "1548990 - RAIMUNDO NONATO ARAUJO", "fantasia": "MERCEARIA NONATINHO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "14369 - URBANO", "endereco": "AV PIAUI 1413 LJ", "cliente": "2783047 - CAMILA F SANTOS COMERCIO DE MEDICAMENTOS ME", "fantasia": "PLUSFARMA", "limite": 0.0, "ativo": "INATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "11363 - BEIRA MAR", "endereco": "RUA JOSE PATRIOTINO", "cliente": "31895 - J F DE SOUSA AMORIM ME", "fantasia": "MERCEARIA O ZEZINHO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "11363 - BEIRA MAR", "endereco": "RUA PROJETADA 21, 2165", "cliente": "1051464 - ANA MARIA PEREIRA GALENO", "fantasia": "MERCANTIL CAUN", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "11363 - BEIRA MAR", "endereco": "JOSE PATRIOTINO", "cliente": "1158903 - O DE ARAUJO MATOS - ME", "fantasia": "O DE ARAUJO MATOS - ME", "limite": 220000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "11363 - BEIRA MAR", "endereco": "RUA ESTUDANTE JOSE PATRIOTINO", "cliente": "1316166 - MARIA ALCIONEIDE DO NASCIMENTO COSTA", "fantasia": "*******", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9040 - CENTRO", "endereco": "SEN", "cliente": "45119 - M P DE CARVALHO SANTOS & CIA LTDA", "fantasia": "M P DE CARVALHO SANTOS & CIA LTDA", "limite": 125000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9040 - CENTRO", "endereco": "LOC CAMURUPIM DE BAIXO", "cliente": "118570 - C PEREIRA SOBRINHO", "fantasia": "C PEREIRA SOBRINHO", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9040 - CENTRO", "endereco": "AVE SENADOR JOAQUIM PIRES", "cliente": "306826 - ELIZEU MARTINS SUPERMERCADOS LTDA", "fantasia": "SUPERMERCADOS ELIZEU MARTINS", "limite": 1502200.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9040 - CENTRO", "endereco": "AV JOSE MARIA DE LIMA 1300", "cliente": "1613884 - M DO C DO NASCIMENTO OLIVEIRA", "fantasia": "MERCANTIL JOHNSON", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9040 - CENTRO", "endereco": "R PIAUI 1426", "cliente": "2488630 - M A SILVEIRA", "fantasia": "MS BRINDES E VARIEDADES", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9040 - CENTRO", "endereco": "AV JOS MARIA DE LIMA", "cliente": "3588803 - E ROCHA LIMA MINIMERCADO ME", "fantasia": "MERCADINHO SAO JOSE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9039 - CEARAZINHO", "endereco": "RUA SAO FRANCISCO", "cliente": "114595 - A C COSTA VERAS ME", "fantasia": "A C COSTA VERAS ME", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "9039 - CEARAZINHO", "endereco": "CEARAZINHO", "cliente": "1240210 - RAIMUNDO N DA ROCHA VERAS - ME", "fantasia": "RAIMUNDO N DA ROCHA VERAS - ME", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2914 - SANTA LUZIA", "endereco": "11 A PETROLINO", "cliente": "3454261 - 52 214 494 LEIVANNI NASCIMENTO DOURADO ME", "fantasia": "MERCANTIL EL DOURADO", "limite": 120000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2867 - CAMURUPIM", "endereco": "RUA CAMURUPIM DE BAIXO,SN,CAMURUPIM", "cliente": "118572 - J PEREIRA S COMERCIAL MEE", "fantasia": "COMERCIAL O TOURINHO", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2690 - ALTO BONITO", "endereco": "RUA RAIMUNDO TARGINO", "cliente": "1322106 - A PINTO SILVEIRA MINIMERCADO", "fantasia": "MERCANTIL WALISSON", "limite": 100000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2690 - ALTO BONITO", "endereco": "CRISPIM", "cliente": "1473186 - R RODRIGUES TRAJANO", "fantasia": "R RODRIGUES TRAJANO", "limite": 180000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2690 - ALTO BONITO", "endereco": "R SAO FRANCISCO", "cliente": "2882438 - 43 667 787 JULIANO ARAUJO DE OLIVEIRA ME", "fantasia": "MERCADINHO O JULIANO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2635 - COQUEIRO", "endereco": "RUA JOSE GALENO,10288", "cliente": "120639 - M LUIZA DA R CHAVES", "fantasia": "MERCADINHO TIO ROMILDO", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2635 - COQUEIRO", "endereco": "R JOSE QUIRINO 10451 AND", "cliente": "3140634 - F A DE SOUZA ME", "fantasia": "MERCADINHO TIO LUIS", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2635 - COQUEIRO", "endereco": "AV ANTONIETA REIS VELOSO", "cliente": "3215418 - F A DE SOUZA ME", "fantasia": "MERCADINHO TIO LUIS", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2596 - CAMPOS", "endereco": "10 A SAO FRANCISCO", "cliente": "3455369 - 55 352 845 MARANNA SIPAUBA DE ARAUJO ME", "fantasia": "55 352 845 MARANNA SIPAUBA DE ARAUJO ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2571 - POV BREJINHO", "endereco": "LOC POCO VERDE,SN - POV  BREJINHO", "cliente": "119171 - ANTONIO CARLOS F SILVA MEE", "fantasia": "MERCANTIL O AI", "limite": 120000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2571 - POV BREJINHO", "endereco": "LOC BREJINHO DE FATIMA", "cliente": "488354 - MARIA DAS GRACAS B OLIVEIRA ME", "fantasia": "VAREJO CONSTRUCOES", "limite": 38000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2571 - POV BREJINHO", "endereco": "LOC PINTO", "cliente": "883974 - M. DE F. .DE OLIVEIRA BRITO", "fantasia": "MERCANTIL OLIVEIRA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2571 - POV BREJINHO", "endereco": "CPO LOCALIDADE LAGOA DAS PEDRAS, S/N", "cliente": "2252492 - FRANCISCO DAS CHAGAS LIMA DE OLIVEIRA", "fantasia": "CHAGAS PEDRA", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "ACES POVOADO BREJINHO DE SAO FRANCISCO 155 SL A", "cliente": "513479 - ROMARIO MACHADO VERAS ME", "fantasia": "MERCEARIA O ROMARIO", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "POV BREJINHO DE FATIMA", "cliente": "585305 - F BRITO VERAS LTDA", "fantasia": "F BRITO VERAS LTDA", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "POV BEZERRO MORTO", "cliente": "1020240 - A J SANTOS DE CARVALHO - ME", "fantasia": "A J SANTOS DE CARVALHO - ME", "limite": 150000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "LOCALIDADE CAMURUPIN DE CIMA", "cliente": "1120491 - M N F DA SILVA MERCEARIA", "fantasia": "M N F DA SILVA MERCEARIA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "LOC LAGOA DO CAMELO", "cliente": "1128269 - FRANCISCO DEC ASSIS S BRITO ME", "fantasia": "FRANCISCO DEC ASSIS S BRITO ME", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "AC CURRAL VELHO", "cliente": "1367512 - F. DAS CHAGAS GALENO PEREIRA", "fantasia": "F. DAS CHAGAS GALENO PEREIRA", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "POVOADO JARDIM", "cliente": "1394915 - ARAGAO ALVES E CARVALHO LTDA - ME", "fantasia": "ARAGAO ALVES E CARVALHO LTDA - ME", "limite": 350000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "LOC CARAPEBAS", "cliente": "1447309 - IVONETE DE ASSIS NASCIMENTO MERCANTIL", "fantasia": "MERCADINHO CARAPEBAS", "limite": 10000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "POVOADO BREJINHO DE FATIMA", "cliente": "1472702 - FRANCISCO DAS CHAGAS BRITO PEREIRA", "fantasia": "FRANCISCO DAS CHAGAS BRITO PEREIRA", "limite": 40000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "LOC INGARANA", "cliente": "1544698 - IVONETE NOBREGA FONTENELE", "fantasia": "************", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "POV POVOADO CAMPESTRE", "cliente": "1610814 - A SALES DE SA", "fantasia": "A SALES DE SA", "limite": 25000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "PROJETADA", "cliente": "1711737 - A LUIZA DE SOUSA SANTOS", "fantasia": "A LUIZA DE SOUSA SANTOS", "limite": 35000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "BREJINHO DE SAO FRANCISCO", "cliente": "1797251 - ROGERIO MACHADO VERAS", "fantasia": "ROGERIO BEBIDAS", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "EST BRANDAO LUIS CORREIA", "cliente": "1949686 - ANTONIA DANIELLA VERAS DE ARAUJO", "fantasia": "MERCANTIL FILHO & DANY", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "LOCALIDADE JABOTI", "cliente": "2049497 - MARIANA GALENO DE ARAUJO 05332234317", "fantasia": "MARIANA GALENO DE ARAUJO 05332234317", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "AVE LC CAMURUPIM DE BAIXO", "cliente": "2160207 - F DAS CHAGAS C DO NASCIMENTO - ME", "fantasia": "MERCANTIL CARRIM", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "COM POVOADO BREJINHO I", "cliente": "2793674 - FABIO PEREIRA DOS SANTOS ME", "fantasia": "COMERCIO DO FABIO", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "COMU SANTA ROSA S/N SL", "cliente": "3837075 - 57 887 061 MIKAELLE SANTOS FERREIRA ME", "fantasia": "57 887 061 MIKAELLE SANTOS FERREIRA ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "EST BAIXA DO CARPINO", "cliente": "4053030 - 57 618 113 FRANCISCO DAS CHAGAS MACHADO DA SILVA ME", "fantasia": "57 618 113 FRANCISCO DAS CHAGAS MACHADO DA SILVA ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "EST POVOADO CAMURUPIM DE BAIXO", "cliente": "4130357 - F H F DA SILVA ARAUJO", "fantasia": "F H F DA SILVA ARAUJO", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "241 - LUIS CORREIA", "bairro": "2569 - ZONA RURAL", "endereco": "DIST POVOADO BREJINHO DE FATIMA", "cliente": "4130378 - F H F DA SILVA ARAUJO ME", "fantasia": "FARMACLIN", "limite": 14000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "45818 - SAO JOSE", "endereco": "10 A LAGOA DE SAO JOSE SEM C", "cliente": "3484500 - FRANCISCO CLAUDINEY SANTOS SILVA 07150582311", "fantasia": "FRANCISCO CLAUDINEY SANTOS SILVA 07150582311", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "38257 - BOROGODOO", "endereco": "R RUA DO SOSSEGO", "cliente": "2945273 - 50 004 007 LUIZ CARLOS DONELIAN JUNIOR ME", "fantasia": "EMPORIO BG", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "25350 - LC MORRO BRANCO", "endereco": "EST DA BARRINHA", "cliente": "2799291 - PENHA CASTRO LTDA ME", "fantasia": "SUPER SARDIM", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "RUA SAO JOSE", "cliente": "352568 - F DAS C S DA SILVA MINIMERC ME", "fantasia": "F DAS C S DA SILVA MINIMERC ME", "limite": 100000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "BOA VISTA", "cliente": "399233 - NARCISIO CAETANO DE B FILHO ME", "fantasia": "NARCISIO CAETANO DE B FILHO ME", "limite": 180000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "EST. BARRINHA/MORRO BRANCO", "cliente": "1240225 - VALDELICIO SANTOS DA SILVA", "fantasia": "VALDELICIO SANTOS DA SILVA", "limite": 50000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "CAMURUPIM DO CAJUEIRO", "cliente": "1784747 - JOSE REGINALDO VERAS DE ARAUJO", "fantasia": "JOSE REGINALDO VERAS DE ARAUJO", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "EST POVOADO DE MORADA NOVA, 31", "cliente": "2361671 - F. DAS C. SANTOS DA SILVA MINIMERCADO", "fantasia": "COMERCIAL SANTOS", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "EST BARRA GRANDE", "cliente": "3498502 - A RAMOS DOS SANTOS LTDA ME", "fantasia": "A RAMOS DOS SANTOS LTDA ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "PC NS DA CONCEI O", "cliente": "3660682 - MOMEU SUPERMERCADO LTDA ME", "fantasia": "SUPERMERCADO MOMEU", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "R POVOADO BOA VISTA S/N ANEXO", "cliente": "4227898 - 50 858 953 CHARLES ALVES DOS REIS ME", "fantasia": "MERCANTIL REIS", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "24850 - ZONA RURAL", "endereco": "R SAO JOSE 47 ANEXO", "cliente": "4292706 - A C DA SILVA MINIMERCADOS LTDA ME", "fantasia": "DISTRIBUIDORA DAS CHAGAS", "limite": 100000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "16240 - POVOADO BARRA GRANDE", "endereco": "PC NS DA CONCEICAO", "cliente": "2272022 - POIS PRONTO MERCADINHO LTDA ME", "fantasia": "POIS PRONTO CONVENIENCIA", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "16240 - POVOADO BARRA GRANDE", "endereco": "R PONTAL DA BARRA 310 LJ", "cliente": "2310811 - D KLUMPP CORTEZ ME", "fantasia": "ORAMAIS", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "14847 - URBANO", "endereco": "BARRA GRANDE", "cliente": "1394920 - J E SOUSA DO NASCIMENTO", "fantasia": "J E SOUSA DO NASCIMENTO", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "RUA LEONCIO LOPES DE ARAUJO", "cliente": "1137068 - MARCELINA SANTOS DE ARAUJO PENHA - ME", "fantasia": "MERCEARIA SANTO ANTONIO", "limite": 20000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "RUA ARLINDO SAMPAIO", "cliente": "1318946 - LIVIO RIBEIRO DOS SANTOS NETO - ME", "fantasia": "LIVIO RIBEIRO DOS SANTOS NETO - ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "PC PRACA NOSSA SENHORA DA CONCEICAO", "cliente": "2114066 - BEGE CONVENIENCIA EIRELI ME", "fantasia": "BEGE CONVENIENCIA", "limite": 16000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "R ALTO BOA VISTA", "cliente": "2315027 - F. M. DA CONCEICAO SUPERMERCADO", "fantasia": "SUPEMERCADO MARIA VITORIA", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "10 A RUA RAIMUNDO CORREIA SILVA", "cliente": "3488843 - 52 950 785 JOANA D ARC SANTOS DA ROCHA ME", "fantasia": "52 950 785 JOANA D ARC SANTOS DA ROCHA ME", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "10 A RAIMUNDO CORREIA SILVA 131 ANEXO", "cliente": "3666433 - 57 769 276 JOSIANE SANTOS DA ROCHA ME", "fantasia": "57 769 276 JOSIANE SANTOS DA ROCHA ME", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "11692 - BARRA GRANDE", "endereco": "R ARLINDO SAMPAIO", "cliente": "4017366 - 62 050 887 HERIO DOS SANTOS PORTUGAL ME", "fantasia": "62 050 887 HERIO DOS SANTOS PORTUGAL ME", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "10954 - RURAL.", "endereco": "RUA URBANO DA ANINHA", "cliente": "1203049 - J SANTOS ALVES", "fantasia": "COMERCIAL ALVES", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "10954 - RURAL.", "endereco": "PC NOSSA SENHORA DA CONCEICAO N 136", "cliente": "1920085 - CLEA FONTENELE DE ARAUJO", "fantasia": "PANIFICADORA E LANCHONETE SABOR E ARTE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "RUA SAO JOSE", "cliente": "118546 - LUCIANA ALVES DA PENHA", "fantasia": "LUCIANA ALVES DA PENHA", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "AVE GETULIO VARGAS", "cliente": "118567 - NARCISIO CAETANO DE BRITO FILHO - EPP", "fantasia": "NARCISIO CAETANO DE BRITO FILHO - EPP", "limite": 180000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "RUA GERALDO LAURO", "cliente": "118616 - A S DA SILVA MINIMERCADO", "fantasia": "A S DA SILVA MINIMERCADO", "limite": 0.0, "ativo": "INATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "AV SOUZA", "cliente": "119170 - F J DA ROCHA RODRIGUES COMERCI", "fantasia": "F J DA ROCHA RODRIGUES COMERCI", "limite": 25000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "RUA JOAO JORGE", "cliente": "121126 - F LAURINO COMERCIO DE ALIMENTOS LTDA", "fantasia": "F LAURINO COMERCIO DE ALIMENTOS LTDA", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "TRV GRIJALMA CARNEIRO", "cliente": "1464651 - JOSE IVO SANTOS DA SILVA", "fantasia": "JOSE IVO SANTOS DA SILVA", "limite": 30000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "RUA GERALDO LAURO", "cliente": "1524706 - LITORAL CONSTRUTORA E MATERIAL DE CONSTRUCAO LTDA", "fantasia": "LITORAL MERCANTIL E MATERIAL DE CONSTRUCAO EM GERAL", "limite": 0.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "RUA REGINO MENDES", "cliente": "1538518 - MARIA DAS GRACAS RODRIGUES", "fantasia": "MARIA DAS GRACAS RODRIGUES", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "AVE JOAO JORGE", "cliente": "1761931 - M L DOS S BRITO", "fantasia": "MERCANTIL SE TU UMA BENCAO", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "RUA NORDESTE", "cliente": "1847744 - SILAS SANTOS SOUZA", "fantasia": "MERCEARIA SILAS", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1071 - CAJUEIRO DA PRAIA", "bairro": "2570 - CENTRO", "endereco": "R REGINO MENDES", "cliente": "3050468 - 50 060 331 LILIA RODRIGUES LIRA ME", "fantasia": "50 060 331 LILIA RODRIGUES LIRA ME", "limite": 15000.0, "ativo": "ATIVO"}, {"cidade": "1082 - ILHA GRANDE", "bairro": "18122 - BAIXAO", "endereco": "EST ESTRADA PARA OS TATUS 462 SL", "cliente": "3995618 - ELANY LIMA BARROSO LTDA ME", "fantasia": "COMERCIAL O DEDE", "limite": 7000.0, "ativo": "ATIVO"}, {"cidade": "1082 - ILHA GRANDE", "bairro": "2870 - TATUS", "endereco": "EST PARA OS TATUS", "cliente": "124982 - ANTONIO JOAO DO N SILVA", "fantasia": "ANTONIO JOAO DO N SILVA", "limite": 10000.0, "ativo": "ATIVO"}, {"cidade": "187 - TERESINA", "bairro": "8863 - PIO XII", "endereco": "AV INDUSTRIAL GIL MARTINS", "cliente": "3599568 - FARMACIAS TOUREIROFARMA LTDA", "fantasia": "FARMACIAS TOUREIROFARMA LTDA", "limite": 914000.0, "ativo": "ATIVO"}, {"cidade": "187 - TERESINA", "bairro": "8792 - CABRAL", "endereco": "AV FREI SERAFIM", "cliente": "3599675 - FARMACIAS TOUREIROFARMA LTDA", "fantasia": "FARMACIAS TOUREIROFARMA LTDA", "limite": 914000.0, "ativo": "ATIVO"}]
 ;
 
-// ── STATE ──
-let allData = window.__DATA__ || [];
-let filtered = [];
-let curStatus = 'all';
-let advOpen = false;
-let tpOpen = false;
+// ═══════════════════════════════════════════════════════════
+//  ClientesProEngine — Motor central do sistema
+// ═══════════════════════════════════════════════════════════
+const E = {
+  // ── ESTADO ──
+  usuario: JSON.parse(localStorage.getItem('cp_usuario') || 'null') || { nome: '', empresa: '' },
+  baseDados: [],
+  metas: JSON.parse(localStorage.getItem('cp_metas') || 'null') || {
+    produtos: [
+      { id: 1, nome: 'Sardinha',   meta: 12 },
+      { id: 2, nome: 'Rosquinhas', meta: 15 },
+      { id: 3, nome: 'Café',       meta: 12 }
+    ]
+  },
+  agenda: JSON.parse(localStorage.getItem('cp_agenda') || '[]'),
+  jogo: JSON.parse(localStorage.getItem('cp_jogo_atual') || 'null') || {
+    emAndamento: false, cidade: '', bairros: [], bairroAtual: '',
+    visitasRealizadas: 0, vendasContabilizadas: [],
+    clientesPositivadosLog: {}, interrupcaoMotivo: null, startTime: null
+  },
 
-// ── INIT ──
-function init() {
-  buildCidades();
-  applyFilters();
-  restorePrefs();
-}
+  // ── PERSISTÊNCIA ──
+  save() {
+    localStorage.setItem('cp_usuario',    JSON.stringify(this.usuario));
+    localStorage.setItem('cp_dados',      JSON.stringify(this.baseDados));
+    localStorage.setItem('cp_metas',      JSON.stringify(this.metas));
+    localStorage.setItem('cp_agenda',     JSON.stringify(this.agenda));
+    localStorage.setItem('cp_jogo_atual', JSON.stringify(this.jogo));
+  },
 
-// ── BUILD SELECTS ──
-function buildCidades() {
-  const sel = document.getElementById('cidadeSel');
-  const cidades = [...new Set(allData.map(r => r.cidade))].sort();
-  cidades.forEach(c => {
-    const o = document.createElement('option');
-    o.value = c;
-    o.textContent = cleanLbl(c);
-    sel.appendChild(o);
-  });
-}
+  // ── CARREGAR BASE ──
+  carregarBase() {
+    const salvo = localStorage.getItem('cp_dados');
+    if (salvo) {
+      this.baseDados = JSON.parse(salvo);
+    } else {
+      // Normaliza window.__DATA__ (planilha original)
+      this.baseDados = (window.__DATA__ || []).map((r, i) => this._normalizar(r, i));
+      this.save();
+    }
+  },
 
-// Called ONLY when cidade changes — rebuilds bairro list then filters
-function onCidadeChange() {
-  const cidade = document.getElementById('cidadeSel').value;
-  buildBairros(cidade);
-  applyFilters();
-}
+  _normalizar(r, idx) {
+    const clienteStr = String(r.cliente || '');
+    const codeMatch  = clienteStr.match(/^(\d+)/);
+    const id         = codeMatch ? codeMatch[1] : String(idx + 1);
+    let   fantasia   = String(r.fantasia || '').trim();
+    if (!fantasia || fantasia.startsWith('***') || fantasia === fantasia.toUpperCase() && fantasia === clienteStr)
+      fantasia = clienteStr.replace(/^\d+\s*[-–]\s*/, '').trim();
+    return {
+      _id:      id,
+      cidade:   String(r.cidade   || '').trim(),
+      bairro:   String(r.bairro   || '').trim(),
+      endereco: String(r.endereco || '').trim(),
+      cliente:  clienteStr.trim(),
+      fantasia: fantasia,
+      limite:   parseFloat(r.limite) || 0,
+      ativo:    String(r.ativo || 'ATIVO').toUpperCase().trim(),
+      _novo:    r._novo || false,
+      _editado: r._editado || false
+    };
+  },
 
-function buildBairros(cidade) {
-  const sel = document.getElementById('bairroSel');
-  sel.innerHTML = '<option value="">📍 Todos os bairros</option>';
-  const src = cidade ? allData.filter(r => r.cidade === cidade) : allData;
-  const bairros = [...new Set(src.map(r => r.bairro))].sort();
-  bairros.forEach(b => {
-    const o = document.createElement('option');
-    o.value = b;
-    o.textContent = cleanLbl(b);
-    sel.appendChild(o);
-  });
-}
+  // ── PLANILHA BRUTA (array-of-arrays) ──
+  processarPlanilhaBruta(rows) {
+    if (!rows || rows.length < 2) return;
+    const header = rows[0];
+    const map = { cidade:null, bairro:null, endereco:null, cliente:null, fantasia:null, limite:null, ativo:null };
+    header.forEach((col, i) => {
+      const c = String(col).toUpperCase().trim();
+      if      (/CIDAD|MUNIC/.test(c))        map.cidade   = i;
+      else if (/BAIRRO|REGIAO|REGI/.test(c)) map.bairro   = i;
+      else if (/ENDE|LOGRA/.test(c))         map.endereco = i;
+      else if (/FANTASIA|NOME_COM/.test(c))  map.fantasia = i;
+      else if (/CLIENTE|RAZAO/.test(c))      map.cliente  = i;
+      else if (/LIM|CRED|R\$/.test(c))       map.limite   = i;
+      else if (/ATIVO|SITUA/.test(c))        map.ativo    = i;
+    });
+    // Manter clientes novos cadastrados em campo
+    const novos = this.baseDados.filter(r => r._novo);
+    this.baseDados = rows.slice(1)
+      .filter(r => r && r.length > 0)
+      .map((row, i) => this._normalizar({
+        cidade:   row[map.cidade],
+        bairro:   row[map.bairro],
+        endereco: row[map.endereco],
+        cliente:  row[map.cliente],
+        fantasia: row[map.fantasia],
+        limite:   parseFloat(String(row[map.limite] || '').replace(/[^\d.-]/g, '')),
+        ativo:    row[map.ativo]
+      }, i))
+      .concat(novos);
+    this.save();
+  },
 
-function cleanLbl(s) {
-  return String(s).replace(/^\d+ - /, '');
-}
-
-// ── SEARCH ──
-document.getElementById('searchInput').addEventListener('input', function() {
-  document.getElementById('sClear').classList.toggle('on', this.value.length > 0);
-  applyFilters();
-});
-
-function clearSearch() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('sClear').classList.remove('on');
-  applyFilters();
-}
-
-// ── STATUS PILLS ──
-function setStatus(s, btn) {
-  curStatus = s;
-  document.querySelectorAll('.pills-bar .pill').forEach(p => {
-    p.classList.remove('on');
-    if (p.dataset.s === s) p.classList.add('on');
-  });
-  applyFilters();
-}
-
-// ── RANGE ──
-function onRange(v) {
-  document.getElementById('limDisp').textContent = 'R$ ' + Number(v).toLocaleString('pt-BR');
-}
-
-// ── ADV TOGGLE ──
-function toggleAdv() {
-  advOpen = !advOpen;
-  document.getElementById('advBody').classList.toggle('open', advOpen);
-  document.getElementById('advArr').textContent = advOpen ? '▲' : '▼';
-}
-
-// ── THEME PANEL ──
-function toggleTP() {
-  tpOpen = !tpOpen;
-  document.getElementById('themePanel').classList.toggle('open', tpOpen);
-  document.getElementById('themeBtn').classList.toggle('active', tpOpen);
-}
-document.addEventListener('click', function(e) {
-  if (tpOpen && !e.target.closest('[data-c]') && !e.target.closest('#themeBtn') && !e.target.closest('#themePanel')) {
-    tpOpen = false;
-    document.getElementById('themePanel').classList.remove('open');
-    document.getElementById('themeBtn').classList.remove('active');
-  }
-});
-
-function setColor(c, el) {
-  document.documentElement.dataset.color = c;
-  document.querySelectorAll('.cdot').forEach(d => d.classList.remove('sel'));
-  el.classList.add('sel');
-  localStorage.setItem('cp_color', c);
-}
-
-function toggleDark() {
-  const cur = document.documentElement.dataset.theme;
-  const next = cur === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = next;
-  document.getElementById('themeLabel').textContent = next === 'dark' ? '🌙 Modo escuro' : '☀️ Modo claro';
-  localStorage.setItem('cp_theme', next);
-}
-
-function restorePrefs() {
-  const t = localStorage.getItem('cp_theme');
-  if (t) {
-    document.documentElement.dataset.theme = t;
-    document.getElementById('themeLabel').textContent = t === 'dark' ? '🌙 Modo escuro' : '☀️ Modo claro';
-  }
-  const c = localStorage.getItem('cp_color');
-  if (c) {
-    document.documentElement.dataset.color = c;
-    document.querySelectorAll('.cdot').forEach(d => d.classList.toggle('sel', d.dataset.c === c));
-  }
-}
-
-// ── CORE FILTER — SINGLE SOURCE OF TRUTH ──
-function applyFilters() {
-  const q       = document.getElementById('searchInput').value.trim().toLowerCase();
-  const cidade  = document.getElementById('cidadeSel').value;
-  const bairro  = document.getElementById('bairroSel').value;
-  const limMin  = parseFloat(document.getElementById('limRange').value) || 0;
-  const sort    = document.getElementById('sortSel').value;
-
-  // Note: buildBairros is NOT called here — only called from onCidadeChange()
-  // This prevents the bairro select from being reset on every keypress
-
-  let data = [...allData];
-
-  // 1. status
-  if (curStatus !== 'all') {
-    data = data.filter(r => r.ativo === curStatus);
-  }
-
-  // 2. cidade
-  if (cidade) {
-    data = data.filter(r => r.cidade === cidade);
-  }
-
-  // 3. bairro
-  if (bairro) {
-    data = data.filter(r => r.bairro === bairro);
-  }
-
-  // 4. limite mínimo
-  if (limMin > 0) {
-    data = data.filter(r => (r.limite || 0) >= limMin);
-  }
-
-  // 5. text search — ALL fields, ALL words must match
-  if (q) {
-    const words = q.split(/\s+/).filter(Boolean);
-    data = data.filter(r => {
-      const hay = [r.cidade, r.bairro, r.endereco, r.cliente, r.fantasia]
+  // ── BUSCA LIVRE (multi-campo) ──
+  buscar(query) {
+    if (!query) return this.baseDados;
+    const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    return this.baseDados.filter(r => {
+      const hay = [r._id, r.cidade, r.bairro, r.endereco, r.cliente, r.fantasia]
         .join(' ').toLowerCase();
       return words.every(w => hay.includes(w));
     });
-  }
+  },
 
-  // 6. sort
-  if (sort === 'fantasia')  data.sort((a,b) => (a.fantasia||'').localeCompare(b.fantasia||''));
-  else if (sort === 'limite_d') data.sort((a,b) => (b.limite||0) - (a.limite||0));
-  else if (sort === 'limite_a') data.sort((a,b) => (a.limite||0) - (b.limite||0));
-  else if (sort === 'cidade')   data.sort((a,b) => (a.cidade||'').localeCompare(b.cidade||''));
-  else if (sort === 'bairro')   data.sort((a,b) => (a.bairro||'').localeCompare(b.bairro||''));
-
-  filtered = data;
-
-  // badge
-  let n = 0;
-  if (cidade) n++;
-  if (bairro) n++;
-  if (limMin > 0) n++;
-  const badge = document.getElementById('advBadge');
-  badge.textContent = n;
-  badge.classList.toggle('on', n > 0);
-
-  render(data, q);
-}
-
-// ── CLEAR ALL ──
-function clearAll() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('sClear').classList.remove('on');
-  document.getElementById('cidadeSel').value = '';
-  document.getElementById('bairroSel').innerHTML = '<option value="">📍 Todos os bairros</option>';
-  buildBairros('');
-  document.getElementById('limRange').value = 0;
-  document.getElementById('limDisp').textContent = 'R$ 0';
-  document.getElementById('sortSel').value = '';
-  curStatus = 'all';
-  document.querySelectorAll('.pills-bar .pill').forEach(p => {
-    p.classList.remove('on');
-    if (p.dataset.s === 'all') p.classList.add('on');
-  });
-  applyFilters();
-}
-
-// ── RENDER ──
-function esc(s) {
-  return String(s)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
-}
-function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
-
-function hl(text, q) {
-  if (!q) return esc(text);
-  let r = esc(text);
-  q.split(/\s+/).filter(Boolean).forEach(w => {
-    r = r.replace(new RegExp('(' + escRe(w) + ')', 'gi'), '<mark>$1</mark>');
-  });
-  return r;
-}
-
-function fmtR(v) {
-  if (!v || v === 0) return '—';
-  return 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:0});
-}
-
-function limCls(v) {
-  if (!v || v === 0) return 'v0';
-  if (v >= 100000) return 'vh';
-  return 'vl';
-}
-
-function avatar(name) {
-  const s = String(name || '?').replace(/^\d+ - /, '').replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g, '').trim();
-  const ws = s.split(/\s+/).filter(Boolean);
-  if (ws.length >= 2) return (ws[0][0] + ws[1][0]).toUpperCase();
-  return s.slice(0, 2).toUpperCase() || '??';
-}
-
-function render(data, q) {
-  document.getElementById('statsN').textContent = data.length;
-  const total = data.reduce((s, r) => s + (r.limite || 0), 0);
-  document.getElementById('statsTotal').textContent =
-    data.length > 0 ? 'Σ R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits:0}) : '';
-
-  const el = document.getElementById('results');
-
-  if (data.length === 0) {
-    el.innerHTML = `<div class="empty">
-      <div class="empty-emoji">🔍</div>
-      <h3>Nenhum resultado</h3>
-      <p>Tente outros termos ou limpe os filtros.</p>
-    </div>`;
-    return;
-  }
-
-  // Store filtered globally so copyCard can access by index (no inline JSON)
-  window.__filtered = data;
-
-  el.innerHTML = data.map((r, i) => {
-    const isIn = r.ativo === 'INATIVO';
-    const av   = avatar(r.fantasia || r.cliente);
-    const bairroClean  = cleanLbl(r.bairro);
-    const cidadeClean  = cleanLbl(r.cidade);
-    const clienteNome  = String(r.cliente).replace(/^\d+ - /, '');
-    const clienteCod   = String(r.cliente).match(/^(\d+)/) ? String(r.cliente).match(/^(\d+)/)[1] : '';
-    const delay = Math.min(i * 0.025, 0.3) + 's';
-
-    return `<div class="card${isIn ? ' inativo' : ''}" style="animation-delay:${delay}">
-      <div class="card-bar"></div>
-      <div class="card-head">
-        <div class="card-av">${esc(av)}</div>
-        <div class="card-head-info">
-          <div class="card-fantasia">${hl(r.fantasia || clienteNome, q)}</div>
-          <div class="card-cod">${clienteCod ? clienteCod + ' · ' : ''}${hl(clienteNome, q)}</div>
-        </div>
-        <span class="stag ${isIn ? 'inativo' : 'ativo'}">${esc(r.ativo)}</span>
-      </div>
-      <div class="card-fields">
-        <div class="cf">
-          <div class="cf-ic">📍</div>
-          <div class="cf-body">
-            <span class="cf-lbl">Bairro</span>
-            <span class="cf-val">${hl(bairroClean, q)}</span>
-          </div>
-        </div>
-        <div class="cf">
-          <div class="cf-ic">🏙️</div>
-          <div class="cf-body">
-            <span class="cf-lbl">Cidade</span>
-            <span class="cf-val">${hl(cidadeClean, q)}</span>
-          </div>
-        </div>
-        ${r.endereco ? `<div class="cf">
-          <div class="cf-ic">🗺️</div>
-          <div class="cf-body">
-            <span class="cf-lbl">Endereço</span>
-            <span class="cf-val">${hl(r.endereco, q)}</span>
-          </div>
-        </div>` : ''}
-        <div class="cf">
-          <div class="cf-ic">🏢</div>
-          <div class="cf-body">
-            <span class="cf-lbl">Razão Social</span>
-            <span class="cf-val mono">${hl(r.cliente, q)}</span>
-          </div>
-        </div>
-      </div>
-      <div class="card-div"></div>
-      <div class="card-foot">
-        <div>
-          <div class="lim-lbl">Limite de crédito</div>
-          <div class="lim-val ${limCls(r.limite)}">${fmtR(r.limite)}</div>
-        </div>
-        <button class="act-btn primary" data-idx="${i}" onclick="copyCard(this)">📋 Copiar</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ── COPY — uses index into window.__filtered (no inline JSON) ──
-function copyCard(btn) {
-  const i = parseInt(btn.dataset.idx, 10);
-  const r = window.__filtered[i];
-  if (!r) return;
-  const txt = [
-    '📋 ' + (r.fantasia || r.cliente),
-    '🏢 ' + r.cliente,
-    '📍 Bairro: ' + r.bairro,
-    '🏙️ Cidade: ' + r.cidade,
-    r.endereco ? '🗺️ ' + r.endereco : '',
-    '💰 Limite: ' + fmtR(r.limite),
-    'Status: ' + r.ativo
-  ].filter(Boolean).join('\n');
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(txt).then(() => toast('✅ Copiado!'));
-  } else {
-    const ta = document.createElement('textarea');
-    ta.value = txt; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
-    toast('✅ Copiado!');
-  }
-}
-
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('on');
-  setTimeout(() => t.classList.remove('on'), 2000);
-}
-
-// ── FILE UPLOAD ──
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('upZone').classList.remove('over');
-  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-}
-
-function handleFile(file) {
-  if (!file) return;
-  if (typeof XLSX === 'undefined') { toast('⏳ Aguarde o carregamento…'); return; }
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const wb = XLSX.read(e.target.result, {type: 'array'});
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const raw = XLSX.utils.sheet_to_json(ws, {defval: ''});
-      if (!raw.length) { toast('❌ Arquivo vazio'); return; }
-
-      const rawKeys = Object.keys(raw[0]);
-      const findKey = (patterns) =>
-        rawKeys.find(k => patterns.some(p => k.toLowerCase().replace(/[^a-z]/g,'').includes(p))) || null;
-
-      const map = {
-        cidade:   findKey(['cidade','cidadecliente','city']),
-        bairro:   findKey(['bairro','neighborhood','district']),
-        endereco: findKey(['ende','endereco','address']),
-        cliente:  findKey(['cliente','client','nome','razaosocial','razao']),
-        fantasia: findKey(['fantasia','nomefantasia']),
-        limite:   findKey(['lim','limite','limtotal','credit']),
-        ativo:    findKey(['ativo','status','active'])
-      };
-
-      allData = raw.map(row => ({
-        cidade:   String(row[map.cidade]   || ''),
-        bairro:   String(row[map.bairro]   || ''),
-        endereco: String(row[map.endereco] || ''),
-        cliente:  String(row[map.cliente]  || ''),
-        fantasia: String(row[map.fantasia] || ''),
-        limite:   parseFloat(row[map.limite]) || 0,
-        ativo:    String(row[map.ativo]    || 'ATIVO').toUpperCase().trim()
-      }));
-
-      // rebuild dropdowns
-      document.getElementById('cidadeSel').innerHTML = '<option value="">🏙️ Todas as cidades</option>';
-      buildCidades();
-      clearAll();
-      toast('✅ ' + allData.length + ' clientes carregados!');
-      document.getElementById('upLabel').textContent = '✅ ' + file.name + ' — ' + allData.length + ' registros';
-    } catch(err) {
-      toast('❌ Erro ao ler arquivo');
-      console.error(err);
+  // ── CRUD ──
+  adicionarCliente(dados) {
+    const novo = this._normalizar({ ...dados, _novo: true }, Date.now());
+    novo._id = 'N' + Date.now();
+    this.baseDados.push(novo);
+    this.save();
+    return novo;
+  },
+  atualizarCliente(id, dados) {
+    const i = this.baseDados.findIndex(r => r._id === id);
+    if (i !== -1) {
+      this.baseDados[i] = { ...this.baseDados[i], ...dados, _editado: true };
+      this.save();
     }
-  };
-  reader.readAsArrayBuffer(file);
-}
+  },
 
-init();
+  // ── AGENDA ──
+  agendarRetorno(clienteId, data, obs = '') {
+    this.agenda.push({ id: Date.now(), clienteId, data, obs: obs || 'Retorno agendado', concluido: false });
+    this.save();
+  },
+  concluirAgenda(id) {
+    const a = this.agenda.find(x => x.id === id);
+    if (a) { a.concluido = true; this.save(); }
+  },
+
+  // ── JOGO / ROTA ──
+  iniciarJogo(cidade, bairros) {
+    this.jogo = {
+      emAndamento: true, cidade, bairros, bairroAtual: bairros[0] || '',
+      visitasRealizadas: 0, vendasContabilizadas: [],
+      clientesPositivadosLog: {}, interrupcaoMotivo: null,
+      startTime: Date.now()
+    };
+    this.save();
+  },
+  registrarVenda(clienteId, produtoNome, quantidade, valorUnitario) {
+    const total = quantidade * valorUnitario;
+    this.jogo.vendasContabilizadas.push({ clienteId, produto: produtoNome, qtd: quantidade, total, ts: Date.now() });
+    if (!this.jogo.clientesPositivadosLog[produtoNome])
+      this.jogo.clientesPositivadosLog[produtoNome] = [];
+    if (!this.jogo.clientesPositivadosLog[produtoNome].includes(clienteId))
+      this.jogo.clientesPositivadosLog[produtoNome].push(clienteId);
+    this.jogo.visitasRealizadas++;
+    this.save();
+  },
+  agendarEmRota(clienteId, data, obs) {
+    this.agendarRetorno(clienteId, data, obs);
+    this.jogo.vendasContabilizadas.push({ clienteId, produto: 'AGENDADO', qtd: 0, total: 0, ts: Date.now() });
+    this.jogo.visitasRealizadas++;
+    this.save();
+  },
+  encerrarJogo(motivo = null) {
+    this.jogo.emAndamento = false;
+    this.jogo.interrupcaoMotivo = motivo;
+    this.save();
+  },
+
+  // ── STATS DO JOGO ──
+  statsJogo() {
+    const v = this.jogo.vendasContabilizadas;
+    const totalR = v.reduce((s, x) => s + (x.total || 0), 0);
+    const posit  = this.jogo.clientesPositivadosLog;
+    const byProd = {};
+    this.metas.produtos.forEach(p => {
+      byProd[p.nome] = {
+        meta:      p.meta,
+        positivados: (posit[p.nome] || []).length,
+        pct: Math.round(((posit[p.nome] || []).length / p.meta) * 100)
+      };
+    });
+    return {
+      visitas:   this.jogo.visitasRealizadas,
+      vendas:    v.filter(x => x.produto !== 'AGENDADO' && x.produto !== 'NENHUM (AGENDADO)').length,
+      totalR,
+      byProd,
+      tempo: this.jogo.startTime ? Math.round((Date.now() - this.jogo.startTime) / 60000) : 0
+    };
+  },
+
+  // ── METAS ──
+  adicionarProduto(nome, meta) {
+    this.metas.produtos.push({ id: Date.now(), nome, meta: parseInt(meta) || 10 });
+    this.save();
+  },
+  removerProduto(id) {
+    this.metas.produtos = this.metas.produtos.filter(p => p.id !== id);
+    this.save();
+  },
+  editarMeta(id, novaMeta) {
+    const p = this.metas.produtos.find(x => x.id === id);
+    if (p) { p.meta = parseInt(novaMeta) || p.meta; this.save(); }
+  }
+};
+
+
+const UI = {
+  tela: 'lista',
+  _params: {},
+  _filtros: { q:'', status:'all', cidade:'', bairro:'', limMin:0, sort:'' },
+  _advOpen: false,
+  _tpOpen: false,
+  _jogoQ: '',
+  _jogoBairroFiltro: '',
+  _vendaItens: [],
+  _jBairrosSel: new Set(),
+
+  ir(t, params={}) { this.tela=t; this._params=params; this.render(); window.scrollTo(0,0); },
+
+  render() {
+    const app = document.getElementById('app');
+    switch(this.tela) {
+      case 'lista':       app.innerHTML = this.renderLista();    break;
+      case 'jogo':        app.innerHTML = this.renderJogo();     break;
+      case 'jogo_visita': app.innerHTML = this.renderVisita();   break;
+      case 'agenda':      app.innerHTML = this.renderAgenda();   break;
+      case 'config':      app.innerHTML = this.renderConfig();   break;
+      case 'cadastro':    app.innerHTML = this.renderCadastro(); break;
+    }
+    this._bind();
+    this._updateNav();
+  },
+
+  // ── HELPERS ──
+  esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); },
+  fmtR(v){ if(!v||v===0)return'—'; return'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:0}); },
+  cleanId(s){ return String(s||'').replace(/^\d+\s*[-–]\s*/,''); },
+  avatar(name){
+    const s=String(name||'?').replace(/^\d+\s*[-–]\s*/,'').replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g,'').trim();
+    const ws=s.split(/\s+/).filter(Boolean);
+    return ws.length>=2?(ws[0][0]+ws[1][0]).toUpperCase():s.slice(0,2).toUpperCase()||'??';
+  },
+  hl(text,q){
+    if(!q)return this.esc(text);
+    let r=this.esc(text);
+    q.trim().split(/\s+/).filter(Boolean).forEach(w=>{
+      r=r.replace(new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');
+    });
+    return r;
+  },
+  limCls(v){ return !v||v===0?'v0':v>=100000?'vh':'vl'; },
+
+  // ══════════════════════════════════════
+  //  TELA 1 — LISTA
+  // ══════════════════════════════════════
+  renderLista() {
+    const f = this._filtros;
+    const cidades = [...new Set(E.baseDados.map(r=>r.cidade))].sort();
+    const bairrosSrc = f.cidade ? E.baseDados.filter(r=>r.cidade===f.cidade) : E.baseDados;
+    const bairros = [...new Set(bairrosSrc.map(r=>r.bairro))].sort();
+
+    let data = [...E.baseDados];
+    if(f.status!=='all') data=data.filter(r=>r.ativo===f.status);
+    if(f.cidade)         data=data.filter(r=>r.cidade===f.cidade);
+    if(f.bairro)         data=data.filter(r=>r.bairro===f.bairro);
+    if(f.limMin>0)       data=data.filter(r=>r.limite>=f.limMin);
+    if(f.q){
+      const words=f.q.toLowerCase().split(/\s+/).filter(Boolean);
+      data=data.filter(r=>{
+        const hay=[r._id,r.cidade,r.bairro,r.endereco,r.cliente,r.fantasia,r.telefone||''].join(' ').toLowerCase();
+        return words.every(w=>hay.includes(w));
+      });
+    }
+    if(f.sort==='fantasia') data.sort((a,b)=>(a.fantasia||'').localeCompare(b.fantasia||''));
+    else if(f.sort==='ld')  data.sort((a,b)=>(b.limite||0)-(a.limite||0));
+    else if(f.sort==='la')  data.sort((a,b)=>(a.limite||0)-(b.limite||0));
+    else if(f.sort==='cid') data.sort((a,b)=>(a.cidade||'').localeCompare(b.cidade||''));
+    else if(f.sort==='bai') data.sort((a,b)=>(a.bairro||'').localeCompare(b.bairro||''));
+
+    window.__filtered = data;
+    const total = data.reduce((s,r)=>s+(r.limite||0),0);
+    const advN = [f.cidade,f.bairro,f.limMin>0?1:null].filter(Boolean).length;
+
+    const empty = E.baseDados.length === 0;
+
+    const cards = data.length===0
+      ? `<div class="empty"><div class="empty-emoji">${empty?'📂':'🔍'}</div>
+         <h3>${empty?'Base vazia':'Nenhum resultado'}</h3>
+         <p>${empty?'Carregue um arquivo .xlsx para começar':'Tente outros termos ou limpe os filtros'}</p>
+         ${empty?`<button class="btn-primary" style="margin-top:16px;max-width:260px" onclick="document.getElementById('fileInput').click()">📂 Carregar planilha</button>`:''}</div>`
+      : data.map((r,i)=>{
+          const isIn=r.ativo==='INATIVO';
+          return `<div class="card${isIn?' inativo':''}" style="animation-delay:${Math.min(i*.02,.3)}s">
+            <div class="card-bar"></div>
+            <div class="card-head">
+              <div class="card-av">${this.esc(this.avatar(r.fantasia||r.cliente))}</div>
+              <div class="card-head-info">
+                <div class="card-fantasia">${this.hl(r.fantasia||this.cleanId(r.cliente),f.q)}</div>
+                <div class="card-cod">${this.esc(r._id)} · ${this.hl(this.cleanId(r.cliente),f.q)}</div>
+              </div>
+              <span class="stag ${isIn?'inativo':'ativo'}">${this.esc(r.ativo)}</span>
+            </div>
+            <div class="card-fields">
+              <div class="cf"><div class="cf-ic">📍</div><div class="cf-body"><span class="cf-lbl">Bairro</span><span class="cf-val">${this.hl(this.cleanId(r.bairro),f.q)}</span></div></div>
+              <div class="cf"><div class="cf-ic">🏙️</div><div class="cf-body"><span class="cf-lbl">Cidade</span><span class="cf-val">${this.hl(this.cleanId(r.cidade),f.q)}</span></div></div>
+              ${r.endereco?`<div class="cf"><div class="cf-ic">🗺️</div><div class="cf-body"><span class="cf-lbl">Endereço</span><span class="cf-val">${this.hl(r.endereco,f.q)}</span></div></div>`:''}
+              ${r.telefone?`<div class="cf"><div class="cf-ic">📞</div><div class="cf-body"><span class="cf-lbl">Telefone</span><span class="cf-val">${this.hl(r.telefone,f.q)}</span></div></div>`:''}
+              <div class="cf"><div class="cf-ic">🏢</div><div class="cf-body"><span class="cf-lbl">Razão Social</span><span class="cf-val mono">${this.hl(r.cliente,f.q)}</span></div></div>
+            </div>
+            <div class="card-div"></div>
+            <div class="card-foot">
+              <div><div class="lim-lbl">Limite de crédito</div><div class="lim-val ${this.limCls(r.limite)}">${this.fmtR(r.limite)}</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="act-btn" data-action="agendar" data-idx="${i}">📅</button>
+                <button class="act-btn primary" data-action="copiar" data-idx="${i}">📋</button>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+
+    return `
+    <div class="topbar">
+      <div class="topbar-head">
+        <div class="logo">
+          <div class="logo-icon">📋</div>
+          <div class="logo-text">Clientes Pro<small>${this.esc(E.usuario.empresa||'Filtro inteligente')}</small></div>
+        </div>
+        <div class="topbar-actions">
+          <label class="icon-btn" title="Carregar XLSX" style="cursor:pointer">📂<input type="file" id="fileInput" accept=".xlsx,.xls,.pdf" style="display:none"></label>
+          <div style="position:relative">
+            <button class="icon-btn" id="themeBtn">🎨</button>
+            <div class="theme-panel" id="themePanel">
+              <div class="tp-label">Cor do tema</div>
+              <div class="color-row">
+                <div class="cdot c-ocean" data-c="ocean"></div>
+                <div class="cdot c-sunset" data-c="sunset"></div>
+                <div class="cdot c-mint" data-c="mint"></div>
+                <div class="cdot c-rose" data-c="rose"></div>
+                <div class="cdot c-slate" data-c="slate"></div>
+              </div>
+              <div class="toggle-row">
+                <span class="toggle-label" id="themeLabel">🌙 Modo escuro</span>
+                <div class="sw" id="darkSw"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <span class="s-icon">🔍</span>
+        <input id="searchInput" type="search" placeholder="Buscar por ID, nome, bairro, endereço…" value="${this.esc(f.q)}" autocomplete="off" spellcheck="false">
+        <button class="s-clear ${f.q?'on':''}" id="sClear">✕</button>
+      </div>
+    </div>
+    <div class="pills-bar">
+      <button class="pill p-all ${f.status==='all'?'on':''}" data-s="all">Todos</button>
+      <button class="pill p-ativ ${f.status==='ATIVO'?'on':''}" data-s="ATIVO">✅ Ativo</button>
+      <button class="pill p-inat ${f.status==='INATIVO'?'on':''}" data-s="INATIVO">🔴 Inativo</button>
+    </div>
+    <div class="adv-header" id="advHeader">
+      <span>⚙️ Filtros avançados ${advN>0?`<span class="adv-badge on">${advN}</span>`:''}</span>
+      <span>${this._advOpen?'▲':'▼'}</span>
+    </div>
+    <div class="adv-body ${this._advOpen?'open':''}" id="advBody">
+      <div class="adv-inner">
+        <div class="sel-wrap"><select class="asel" id="cidadeSel">
+          <option value="">🏙️ Todas as cidades</option>
+          ${cidades.map(c=>`<option value="${this.esc(c)}" ${f.cidade===c?'selected':''}>${this.esc(this.cleanId(c))}</option>`).join('')}
+        </select></div>
+        <div class="sel-wrap"><select class="asel" id="bairroSel">
+          <option value="">📍 Todos os bairros</option>
+          ${bairros.map(b=>`<option value="${this.esc(b)}" ${f.bairro===b?'selected':''}>${this.esc(this.cleanId(b))}</option>`).join('')}
+        </select></div>
+        <div class="range-wrap">
+          <div class="range-head"><span>💰 Limite mínimo</span><strong id="limDisp">R$ ${Number(f.limMin).toLocaleString('pt-BR')}</strong></div>
+          <input type="range" id="limRange" min="0" max="1502200" step="1000" value="${f.limMin}">
+        </div>
+        <div class="sel-wrap"><select class="asel" id="sortSel">
+          <option value="">📶 Ordem padrão</option>
+          <option value="fantasia" ${f.sort==='fantasia'?'selected':''}>🔤 Nome A→Z</option>
+          <option value="ld" ${f.sort==='ld'?'selected':''}>💰 Maior limite</option>
+          <option value="la" ${f.sort==='la'?'selected':''}>💸 Menor limite</option>
+          <option value="cid" ${f.sort==='cid'?'selected':''}>🏙️ Por cidade</option>
+          <option value="bai" ${f.sort==='bai'?'selected':''}>📍 Por bairro</option>
+        </select></div>
+        <div class="adv-clear-btn" id="clearAllBtn">🗑️ Limpar todos os filtros</div>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div><span class="stats-n">${data.length}</span><span class="stats-label"> clientes</span></div>
+      <span class="stats-total">${data.length>0?'Σ R$ '+total.toLocaleString('pt-BR',{minimumFractionDigits:0}):''}</span>
+    </div>
+    <div class="upload-zone" id="upZone">
+      <span style="font-size:1.2rem">📂</span>
+      <span id="upLabel">${E.baseDados.length>0?E.baseDados.length+' clientes carregados — toque para atualizar':'Carregar arquivo .xlsx'}</span>
+    </div>
+    <div id="results">${cards}</div>`;
+  },
+
+  // ══════════════════════════════════════
+  //  TELA 2 — JOGO
+  // ══════════════════════════════════════
+  renderJogo() {
+    const j = E.jogo;
+    if(!j.emAndamento) return this._renderJogoSetup();
+    return this._renderJogoPainel();
+  },
+
+  _renderJogoSetup() {
+    const j = E.jogo;
+    const cidades = [...new Set(E.baseDados.filter(r=>r.ativo==='ATIVO').map(r=>r.cidade))].sort();
+    const temAnterior = j.vendasContabilizadas && j.vendasContabilizadas.length > 0;
+    return `
+    <div class="page-header">
+      <h2>🎮 Modo Rota</h2>
+      <p class="page-sub">Configure sua rota de hoje</p>
+    </div>
+    <div class="page-body">
+      ${E.baseDados.length===0?`
+      <div class="form-card" style="text-align:center;padding:24px 16px">
+        <div style="font-size:2.5rem;margin-bottom:10px">📂</div>
+        <div style="font-weight:700;margin-bottom:6px">Base de dados vazia</div>
+        <div style="font-size:.78rem;color:var(--text2);margin-bottom:14px">Carregue um arquivo .xlsx com seus clientes para usar o Modo Rota</div>
+        <label class="btn-primary" style="display:inline-block;cursor:pointer">📂 Carregar planilha<input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none"></label>
+      </div>`:`
+      <div class="form-card">
+        <div class="form-group">
+          <label class="form-label">🏙️ Cidade da rota</label>
+          <div class="sel-wrap"><select class="asel" id="jCidade">
+            <option value="">Selecione a cidade...</option>
+            ${cidades.map(c=>`<option value="${this.esc(c)}">${this.esc(this.cleanId(c))}</option>`).join('')}
+          </select></div>
+        </div>
+        <div id="jBairrosWrap" style="display:none">
+          <label class="form-label" style="display:block;margin-bottom:6px">📍 Bairros — toque para selecionar</label>
+          <div id="jBairrosGrid" class="bairro-grid"></div>
+        </div>
+        <div id="jPreview" class="jogo-preview" style="display:none">
+          <div class="jp-stat"><span id="jpCount">0</span><small>clientes ativos na rota</small></div>
+        </div>
+        <button class="btn-primary" id="btnIniciarJogo" style="display:none;margin-top:8px">🚀 Iniciar Rota</button>
+      </div>
+      ${temAnterior?`
+      <div class="form-card" style="border-color:var(--w);background:var(--wbg)">
+        <div style="font-size:.82rem;color:var(--w);font-weight:700;margin-bottom:8px">⚠️ Rota não finalizada — ${E.jogo.vendasContabilizadas.length} registros</div>
+        <button class="btn-secondary" id="btnRetomar" style="width:100%">↩️ Retomar rota anterior</button>
+      </div>`:''}
+      `}
+    </div>`;
+  },
+
+  _renderJogoPainel() {
+    const j  = E.jogo;
+    const s  = E.statsJogo();
+    const q  = this._jogoQ||'';
+    const bf = this._jogoBairroFiltro||'';
+
+    const todosRota = E.baseDados.filter(r=>
+      r.cidade===j.cidade &&
+      (j.bairros.length===0||j.bairros.includes(r.bairro)) &&
+      r.ativo==='ATIVO'
+    );
+    const visitadosSet = new Set(j.vendasContabilizadas.map(v=>v.clienteId));
+    const bairrosRota  = [...new Set(todosRota.map(r=>r.bairro))].sort();
+
+    const applyFiltro = lista => {
+      let r = lista;
+      if(bf) r=r.filter(x=>x.bairro===bf);
+      if(q){ const ws=q.toLowerCase().split(/\s+/).filter(Boolean);
+        r=r.filter(x=>{ const h=[x._id,x.fantasia,x.cliente,x.bairro,x.endereco,x.telefone||''].join(' ').toLowerCase(); return ws.every(w=>h.includes(w)); }); }
+      return r;
+    };
+
+    const pendentesAll = todosRota.filter(r=>!visitadosSet.has(r._id));
+    const visitadosAll = todosRota.filter(r=> visitadosSet.has(r._id));
+    const pendentes    = applyFiltro(pendentesAll);
+    const visitados    = applyFiltro(visitadosAll);
+
+    const barras = E.metas.produtos.map(p=>{
+      const n  = s.byProd[p.nome]?.positivados||0;
+      const pct= Math.min(s.byProd[p.nome]?.pct||0,100);
+      const cor= pct>=100?'var(--a2)':pct>=60?'var(--w)':'var(--d)';
+      return `<div class="mix-item">
+        <div class="mix-head"><span>${this.esc(p.nome)}</span><span style="color:${cor}">${n}/${p.meta}</span></div>
+        <div class="mix-bar-bg"><div class="mix-bar-fill" style="width:${pct}%;background:${cor}"></div></div>
+      </div>`;
+    }).join('');
+
+    // agrupar por bairro
+    const grupos = {};
+    pendentes.forEach(r=>{ const k=r.bairro||'SEM BAIRRO'; if(!grupos[k])grupos[k]=[]; grupos[k].push(r); });
+
+    const listaPendHTML = Object.entries(grupos).map(([bairro,lista])=>`
+      <div class="jogo-bairro-sep">
+        <span class="jogo-bairro-nome">📍 ${this.esc(this.cleanId(bairro))}</span>
+        <span class="jogo-bairro-count">${lista.length} pendentes</span>
+      </div>
+      ${lista.map(r=>this._renderJCard(r,false)).join('')}
+    `).join('') || `<div class="empty"><div class="empty-emoji">🎉</div><h3>Todos visitados!</h3></div>`;
+
+    const listaVisHTML = visitados.length
+      ? visitados.map(r=>this._renderJCard(r,true)).join('')
+      : `<div class="empty"><div class="empty-emoji">👟</div><h3>Nenhum visitado ainda</h3></div>`;
+
+    return `
+    <div class="jogo-header">
+      <div class="jogo-top-row">
+        <div class="jogo-cidade">${this.esc(this.cleanId(j.cidade))}</div>
+        <button class="js-end" id="btnEncerrar">⛳ Encerrar</button>
+      </div>
+      <div class="jogo-meta-strip">${barras}</div>
+      <div class="jogo-stats-row">
+        <div class="js-pill">👟 ${s.visitas}</div>
+        <div class="js-pill">💰 ${this.fmtR(s.totalR)}</div>
+        <div class="js-pill">⏱️ ${s.tempo}min</div>
+        <div class="js-pill">⏳ ${pendentesAll.length} restam</div>
+      </div>
+    </div>
+    <div class="jogo-search-bar">
+      <span class="s-icon" style="position:absolute;left:28px;top:50%;transform:translateY(-50%);pointer-events:none">🔍</span>
+      <input id="jogoSearch" type="search" value="${this.esc(q)}" placeholder="Buscar na rota por nome, endereço…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="jbairro-bar">
+      <button class="jbairro-pill ${!bf?'on':''}" data-bf="">Todos (${pendentesAll.length})</button>
+      ${bairrosRota.map(b=>`<button class="jbairro-pill ${bf===b?'on':''}" data-bf="${this.esc(b)}">${this.esc(this.cleanId(b))} (${todosRota.filter(r=>r.bairro===b&&!visitadosSet.has(r._id)).length})</button>`).join('')}
+    </div>
+    <div class="jogo-tabs">
+      <button class="jtab on" data-tab="pendentes">Pendentes (${pendentes.length})</button>
+      <button class="jtab" data-tab="visitados">Visitados (${visitados.length})</button>
+    </div>
+    <div id="jogoLista" data-current="pendentes">
+      <div id="tabPendentes">${listaPendHTML}</div>
+      <div id="tabVisitados" style="display:none">${listaVisHTML}</div>
+    </div>`;
+  },
+
+  _renderJCard(r, visitado) {
+    const tel = r.telefone||'';
+    const isIn = r.ativo==='INATIVO';
+    return `<div class="jcard ${visitado?'visited':''}" id="jcard_${this.esc(r._id)}">
+      <div class="jcard-head" data-action="expandir" data-id="${this.esc(r._id)}">
+        <div class="card-av small ${isIn?'inativo':''}">${this.esc(this.avatar(r.fantasia||r.cliente))}</div>
+        <div style="flex:1;min-width:0">
+          <div class="jcard-nome">${this.esc(r.fantasia||this.cleanId(r.cliente))}</div>
+          <div class="jcard-end">${this.esc(r.endereco||'Endereço não informado')}</div>
+          ${tel?`<div class="jcard-tel">📞 ${this.esc(tel)}</div>`:'<div class="jcard-tel" style="color:var(--text3)">📞 Sem telefone</div>'}
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+          <div class="jcard-lim">${this.fmtR(r.limite)}</div>
+          <span style="font-size:.58rem;color:var(--text3)">▼ ver mais</span>
+        </div>
+      </div>
+      <div class="jcard-expand" id="jcexp_${this.esc(r._id)}" style="display:none">
+        <div class="jcard-info-grid">
+          <div class="jinfo"><span class="jinfo-lbl">ID</span><span class="jinfo-val">${this.esc(r._id)}</span></div>
+          <div class="jinfo"><span class="jinfo-lbl">Status</span>
+            <span class="jinfo-val" style="color:${isIn?'var(--d)':'var(--a2)'}">${this.esc(r.ativo)}</span>
+          </div>
+          <div class="jinfo jinfo-full"><span class="jinfo-lbl">Razão Social</span>
+            <span class="jinfo-val mono">${this.esc(r.cliente)}</span>
+          </div>
+          <div class="jinfo jinfo-full"><span class="jinfo-lbl">✏️ Endereço</span>
+            <input class="jinfo-edit" data-field="endereco" data-id="${this.esc(r._id)}" value="${this.esc(r.endereco||'')}" placeholder="Endereço...">
+          </div>
+          <div class="jinfo jinfo-full"><span class="jinfo-lbl">✏️ Telefone / WhatsApp</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input class="jinfo-edit" style="flex:1" data-field="telefone" data-id="${this.esc(r._id)}" value="${this.esc(tel)}" placeholder="(xx) xxxxx-xxxx" type="tel">
+              ${tel?`<a href="https://wa.me/55${tel.replace(/\D/g,'')}" target="_blank" class="wa-btn">💬 WhatsApp</a>`:''}
+            </div>
+          </div>
+          <div class="jinfo jinfo-full"><span class="jinfo-lbl">✏️ Observação</span>
+            <input class="jinfo-edit" data-field="obs" data-id="${this.esc(r._id)}" value="${this.esc(r.obs||'')}" placeholder="Anotações sobre o cliente…">
+          </div>
+        </div>
+        ${!visitado?`<div class="jcard-actions">
+          <button class="jbtn verde" data-action="venda" data-id="${this.esc(r._id)}">🛒 Venda</button>
+          <button class="jbtn azul"  data-action="agendar_rota" data-id="${this.esc(r._id)}">📅 Agendar</button>
+          <button class="jbtn cinza" data-action="sem_venda" data-id="${this.esc(r._id)}">❌ Sem venda</button>
+        </div>`:''}
+      </div>
+    </div>`;
+  },
+
+  // ══════════════════════════════════════
+  //  TELA 3 — VISITA / VENDA
+  // ══════════════════════════════════════
+  renderVisita() {
+    const { clienteId } = this._params;
+    const r = E.baseDados.find(x=>x._id===clienteId)||{};
+    return `
+    <div class="page-header">
+      <button class="back-btn" id="backBtn">← Voltar</button>
+      <h2>🛒 Registrar Venda</h2>
+      <p class="page-sub">${this.esc(r.fantasia||this.cleanId(r.cliente))}</p>
+    </div>
+    <div class="page-body">
+      <div class="form-card">
+        <div id="vendaItens"></div>
+        <button class="btn-secondary" id="addItemBtn" style="width:100%;margin-bottom:10px">+ Adicionar produto</button>
+        <div class="venda-total-wrap">
+          <span>Total da venda</span>
+          <strong id="vendaTotal" class="venda-total">R$ 0,00</strong>
+        </div>
+        <button class="btn-primary" id="confirmarVenda">✅ Confirmar venda</button>
+      </div>
+    </div>`;
+  },
+
+  // ══════════════════════════════════════
+  //  TELA 4 — AGENDA
+  // ══════════════════════════════════════
+  renderAgenda() {
+    const hoje = new Date().toISOString().split('T')[0];
+    const agenda = E.agenda.filter(a=>!a.concluido).sort((a,b)=>a.data.localeCompare(b.data));
+    const vencidos = agenda.filter(a=>a.data<hoje);
+    const hj       = agenda.filter(a=>a.data===hoje);
+    const futuros  = agenda.filter(a=>a.data>hoje);
+
+    const grp = (items, lbl, cor) => !items.length?'':
+      `<div class="agenda-group">
+        <div class="agenda-group-label" style="color:${cor}">${lbl} (${items.length})</div>
+        ${items.map(a=>{
+          const c=E.baseDados.find(r=>r._id===a.clienteId);
+          const nome=c?(c.fantasia||this.cleanId(c.cliente)):a.clienteId;
+          return `<div class="agenda-card">
+            <div class="agenda-card-head">
+              <div>
+                <div class="agenda-nome">${this.esc(nome)}</div>
+                <div class="agenda-data" style="color:${cor}">${new Date(a.data+'T12:00:00').toLocaleDateString('pt-BR')}</div>
+              </div>
+              <button class="act-btn primary" data-action="concluir_agenda" data-agid="${a.id}">✅</button>
+            </div>
+            ${a.obs?`<div class="agenda-obs">${this.esc(a.obs)}</div>`:''}
+          </div>`;
+        }).join('')}
+      </div>`;
+
+    return `
+    <div class="page-header"><h2>📅 Agenda</h2><p class="page-sub">Retornos e compromissos</p></div>
+    <div class="page-body">
+      ${grp(vencidos,'⚠️ Atrasados','var(--d)')}
+      ${grp(hj,'📌 Hoje','var(--a)')}
+      ${grp(futuros,'🔜 Próximos','var(--text2)')}
+      ${!agenda.length?`<div class="empty"><div class="empty-emoji">📅</div><h3>Agenda vazia</h3><p>Agende retornos durante a rota.</p></div>`:''}
+    </div>`;
+  },
+
+  // ══════════════════════════════════════
+  //  TELA 5 — CONFIG
+  // ══════════════════════════════════════
+  renderConfig() {
+    return `
+    <div class="page-header"><h2>⚙️ Configurações</h2></div>
+    <div class="page-body">
+      <div class="form-card">
+        <div class="form-section-title">🎯 Mix de Produtos e Metas</div>
+        <div id="prodsList">
+          ${E.metas.produtos.map(p=>`
+          <div class="prod-item">
+            <span class="prod-nome">${this.esc(p.nome)}</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:.75rem;color:var(--text3)">Meta:</span>
+              <input class="mini-input" type="number" value="${p.meta}" min="1" data-pid="${p.id}">
+              <button class="del-btn" data-action="del_prod" data-pid="${p.id}">🗑️</button>
+            </div>
+          </div>`).join('')}
+        </div>
+        <div class="add-prod-row">
+          <input class="asel" id="novoProdNome" placeholder="Nome do produto" style="flex:2;padding:8px 12px">
+          <input class="mini-input" id="novoProdMeta" type="number" placeholder="Meta" min="1" style="width:70px">
+          <button class="act-btn primary" id="addProdBtn">+ Add</button>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title">👤 Perfil do Vendedor</div>
+        <div class="form-group">
+          <label class="form-label">Seu nome</label>
+          <input class="asel" id="cfgNome" value="${this.esc(E.usuario.nome)}" placeholder="Ex: João Silva" style="padding:9px 12px">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Empresa / Distribuidora</label>
+          <input class="asel" id="cfgEmpresa" value="${this.esc(E.usuario.empresa)}" placeholder="Ex: Distribuidora XYZ" style="padding:9px 12px">
+        </div>
+        <button class="btn-primary" id="salvarPerfil">💾 Salvar perfil</button>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title">📊 Dados</div>
+        <div style="font-size:.78rem;color:var(--text2);margin-bottom:12px">
+          ${E.baseDados.length} clientes · ${E.baseDados.filter(r=>r._novo).length} novos · ${E.agenda.filter(a=>!a.concluido).length} agendamentos ativos
+        </div>
+        <button class="btn-secondary" id="exportBtn" style="width:100%;margin-bottom:8px">📤 Exportar backup JSON</button>
+        <button class="btn-danger" id="resetDadosBtn" style="width:100%">🗑️ Resetar base de dados</button>
+      </div>
+    </div>`;
+  },
+
+  // ══════════════════════════════════════
+  //  TELA 6 — NOVO CLIENTE
+  // ══════════════════════════════════════
+  renderCadastro() {
+    const cidades = [...new Set(E.baseDados.map(r=>r.cidade))].sort();
+    return `
+    <div class="page-header">
+      <button class="back-btn" id="backBtn">← Voltar</button>
+      <h2>➕ Novo Cliente</h2>
+      <p class="page-sub">Cadastro em campo</p>
+    </div>
+    <div class="page-body">
+      <div class="form-card">
+        <div class="form-group"><label class="form-label">Nome Fantasia *</label>
+          <input class="asel" id="ncFantasia" placeholder="Nome do comércio" style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Razão Social / CNPJ</label>
+          <input class="asel" id="ncCliente" placeholder="Razão social" style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Telefone / WhatsApp</label>
+          <input class="asel" id="ncTelefone" type="tel" placeholder="(xx) xxxxx-xxxx" style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Endereço</label>
+          <input class="asel" id="ncEndereco" placeholder="Rua, número..." style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Bairro</label>
+          <input class="asel" id="ncBairro" placeholder="Bairro" style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Cidade</label>
+          <div class="sel-wrap"><select class="asel" id="ncCidade">
+            <option value="">Selecione...</option>
+            ${cidades.map(c=>`<option value="${this.esc(c)}">${this.esc(this.cleanId(c))}</option>`).join('')}
+          </select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Limite de Crédito (R$)</label>
+          <input class="asel" id="ncLimite" type="number" placeholder="0" style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Observação</label>
+          <input class="asel" id="ncObs" placeholder="Anotações..." style="padding:9px 12px"></div>
+        <button class="btn-primary" id="salvarNovoCliente">💾 Salvar Cliente</button>
+      </div>
+    </div>`;
+  },
+
+  // ══════════════════════════════════════
+  //  ONBOARDING — usuário sem base
+  // ══════════════════════════════════════
+  mostrarOnboarding() {
+    this._showModal(`
+    <div class="modal onboarding">
+      <div class="ob-logo">📋</div>
+      <h2 class="ob-title">Bem-vindo ao<br><span style="color:var(--a)">Clientes Pro</span></h2>
+      <p class="ob-sub">Seu sistema de rota e vendas para campo</p>
+      <div class="ob-steps">
+        <div class="ob-step"><span class="ob-n">1</span><span>Configure seu perfil com nome e empresa</span></div>
+        <div class="ob-step"><span class="ob-n">2</span><span>Carregue sua planilha de clientes (.xlsx)</span></div>
+        <div class="ob-step"><span class="ob-n">3</span><span>Monte sua rota e registre suas vendas</span></div>
+      </div>
+      <label class="btn-primary" style="display:block;cursor:pointer;text-align:center;margin-bottom:10px">
+        📂 Carregar minha planilha (.xlsx)
+        <input type="file" id="obFileInput" accept=".xlsx,.xls" style="display:none">
+      </label>
+      <button class="btn-secondary" id="obPular" style="width:100%">Pular por agora — entrar sem dados</button>
+    </div>`);
+    document.getElementById('obFileInput')?.addEventListener('change', e => {
+      this._handleFile(e.target.files[0]);
+      this._closeModal();
+    });
+    document.getElementById('obPular')?.addEventListener('click', () => this._closeModal());
+  },
+
+  checkarPerfil() {
+    if(!E.usuario.nome || !E.usuario.empresa) {
+      this._showModal(`
+      <div class="modal">
+        <div class="modal-title">👋 Antes de começar</div>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:14px">Informe seus dados para personalizar o sistema</p>
+        <div class="form-group"><label class="form-label">Seu nome *</label>
+          <input class="asel" id="priNome" placeholder="Ex: João Silva" style="padding:9px 12px"></div>
+        <div class="form-group"><label class="form-label">Empresa / Distribuidora *</label>
+          <input class="asel" id="priEmpresa" placeholder="Ex: Distribuidora XYZ" style="padding:9px 12px"></div>
+        <button class="btn-primary" id="priConfirm" style="width:100%;margin-top:4px">Entrar →</button>
+      </div>`);
+      document.getElementById('priConfirm')?.addEventListener('click', () => {
+        const nome    = document.getElementById('priNome')?.value.trim();
+        const empresa = document.getElementById('priEmpresa')?.value.trim();
+        if(!nome||!empresa){ this._toast('⚠️ Preencha os dois campos'); return; }
+        E.usuario={nome,empresa}; E.save();
+        this._closeModal();
+        this.render();
+        // se base vazia, mostrar onboarding
+        if(E.baseDados.length===0) setTimeout(()=>this.mostrarOnboarding(), 400);
+      });
+    } else if(E.baseDados.length===0) {
+      setTimeout(()=>this.mostrarOnboarding(), 300);
+    }
+  },
+
+  // ══════════════════════════════════════
+  //  BIND EVENTS
+  // ══════════════════════════════════════
+  _bind() {
+    const $ = id => document.getElementById(id);
+    const on = (id,ev,fn) => { const el=$(id); if(el) el.addEventListener(ev,fn); };
+
+    // TEMA
+    on('themeBtn','click',()=>{ this._tpOpen=!this._tpOpen; $('themePanel')?.classList.toggle('open',this._tpOpen); });
+    on('darkSw','click',()=>this._toggleDark());
+    document.querySelectorAll('.cdot[data-c]').forEach(el=>{
+      if(document.documentElement.dataset.color===el.dataset.c) el.classList.add('sel');
+      el.addEventListener('click',()=>this._setColor(el.dataset.c,el));
+    });
+    document.addEventListener('click', e=>{
+      if(this._tpOpen&&!e.target.closest('#themePanel')&&!e.target.closest('#themeBtn')){
+        this._tpOpen=false; $('themePanel')?.classList.remove('open');
+      }
+    },{once:true});
+
+    // LISTA FILTROS
+    on('searchInput','input',e=>{ this._filtros.q=e.target.value; this.render(); });
+    on('sClear','click',()=>{ this._filtros.q=''; this.render(); });
+    on('advHeader','click',()=>{ this._advOpen=!this._advOpen; this.render(); });
+    on('cidadeSel','change',e=>{ this._filtros.cidade=e.target.value; this._filtros.bairro=''; this.render(); });
+    on('bairroSel','change',e=>{ this._filtros.bairro=e.target.value; this.render(); });
+    on('sortSel','change',e=>{ this._filtros.sort=e.target.value; this.render(); });
+    on('clearAllBtn','click',()=>{ this._filtros={q:'',status:'all',cidade:'',bairro:'',limMin:0,sort:''}; this._advOpen=false; this.render(); });
+    on('limRange','input',e=>{ this._filtros.limMin=parseFloat(e.target.value)||0; $('limDisp').textContent='R$ '+Number(e.target.value).toLocaleString('pt-BR'); });
+    on('limRange','change',()=>this.render());
+    document.querySelectorAll('.pill[data-s]').forEach(p=>p.addEventListener('click',()=>{ this._filtros.status=p.dataset.s; this.render(); }));
+
+    // UPLOAD
+    const fi=$('fileInput'); if(fi) fi.addEventListener('change',e=>this._handleFile(e.target.files[0]));
+    on('upZone','click',()=>$('fileInput')?.click());
+
+    // ACTIONS (lista + jogo)
+    document.querySelectorAll('[data-action]').forEach(el=>{
+      el.addEventListener('click',e=>{
+        e.stopPropagation();
+        const a=el.dataset.action, idx=parseInt(el.dataset.idx), id=el.dataset.id, agid=parseInt(el.dataset.agid), pid=parseInt(el.dataset.pid);
+        if(a==='copiar')        this._copiarCard(idx);
+        if(a==='agendar')       this._modalAgendar(window.__filtered?.[idx]?._id);
+        if(a==='concluir_agenda') { E.concluirAgenda(agid); this.render(); }
+        if(a==='del_prod')      { E.removerProduto(pid); this.render(); }
+        if(a==='venda')         this.ir('jogo_visita',{clienteId:id});
+        if(a==='agendar_rota')  this._modalAgendarRota(id);
+        if(a==='sem_venda')     { E.registrarVenda(id,'SEM VENDA',0,0); this.render(); }
+        if(a==='expandir')      this._toggleExpand(id);
+      });
+    });
+
+    // JCARD INLINE EDIT — salva ao sair do campo
+    document.querySelectorAll('.jinfo-edit').forEach(inp=>{
+      inp.addEventListener('blur',()=>{
+        const id=inp.dataset.id, field=inp.dataset.field, val=inp.value.trim();
+        E.atualizarCliente(id,{[field]:val});
+        // atualizar WhatsApp link ao vivo se for telefone
+        if(field==='telefone'){
+          const num=val.replace(/\D/g,'');
+          const expand=document.getElementById('jcexp_'+id);
+          if(expand){
+            const existing=expand.querySelector('.wa-btn');
+            if(existing) existing.href='https://wa.me/55'+num;
+            else if(num){
+              const a=document.createElement('a');
+              a.href='https://wa.me/55'+num; a.target='_blank';
+              a.className='wa-btn'; a.textContent='💬 WhatsApp';
+              inp.parentElement.appendChild(a);
+            }
+          }
+        }
+      });
+      // Enter = blur
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') inp.blur(); });
+    });
+
+    // JOGO SETUP
+    on('jCidade','change',e=>{
+      const cid=e.target.value;
+      const bairros=[...new Set(E.baseDados.filter(r=>r.cidade===cid&&r.ativo==='ATIVO').map(r=>r.bairro))].sort();
+      const grid=$('jBairrosGrid'), wrap=$('jBairrosWrap');
+      if(!grid||!wrap) return;
+      wrap.style.display=cid?'block':'none';
+      this._jBairrosSel=new Set();
+      grid.innerHTML=bairros.map(b=>`<div class="bairro-chip" data-b="${this.esc(b)}">${this.esc(this.cleanId(b))}</div>`).join('');
+      grid.querySelectorAll('.bairro-chip').forEach(ch=>{
+        ch.addEventListener('click',()=>{
+          ch.classList.toggle('sel');
+          if(ch.classList.contains('sel')) this._jBairrosSel.add(ch.dataset.b);
+          else this._jBairrosSel.delete(ch.dataset.b);
+          const sel=[...this._jBairrosSel];
+          const n=E.baseDados.filter(r=>r.cidade===cid&&r.ativo==='ATIVO'&&(sel.length===0||sel.includes(r.bairro))).length;
+          const prev=$('jpCount'); if(prev) prev.textContent=n;
+          const pr=$('jPreview'); if(pr) pr.style.display='flex';
+          const btn=$('btnIniciarJogo'); if(btn) btn.style.display='block';
+        });
+      });
+      // mostrar count inicial (todos os bairros)
+      const n=E.baseDados.filter(r=>r.cidade===cid&&r.ativo==='ATIVO').length;
+      const pr=$('jPreview'); if(pr) pr.style.display='flex';
+      const prev=$('jpCount'); if(prev) prev.textContent=n;
+      const btn=$('btnIniciarJogo'); if(btn) btn.style.display='block';
+    });
+    on('btnIniciarJogo','click',()=>{
+      const cid=$('jCidade')?.value; if(!cid) return;
+      this._jogoQ=''; this._jogoBairroFiltro='';
+      E.iniciarJogo(cid,[...this._jBairrosSel]);
+      this.render();
+    });
+    on('btnRetomar','click',()=>{ E.jogo.emAndamento=true; E.save(); this.render(); });
+    on('btnEncerrar','click',()=>{ if(confirm('Encerrar rota atual?')){ E.encerrarJogo(); this._jogoQ=''; this._jogoBairroFiltro=''; this.render(); } });
+
+    // JOGO BUSCA
+    on('jogoSearch','input',e=>{ this._jogoQ=e.target.value; this.render(); });
+
+    // JOGO BAIRRO PILLS
+    document.querySelectorAll('.jbairro-pill[data-bf]').forEach(b=>{
+      b.addEventListener('click',()=>{ this._jogoBairroFiltro=b.dataset.bf; this.render(); });
+    });
+
+    // JOGO TABS
+    document.querySelectorAll('.jtab[data-tab]').forEach(tab=>{
+      tab.addEventListener('click',()=>{
+        document.querySelectorAll('.jtab').forEach(t=>t.classList.remove('on'));
+        tab.classList.add('on');
+        const isPend=tab.dataset.tab==='pendentes';
+        const p=$('tabPendentes'), v=$('tabVisitados');
+        if(p) p.style.display=isPend?'block':'none';
+        if(v) v.style.display=isPend?'none':'block';
+      });
+    });
+
+    // VISITA / VENDA
+    on('backBtn','click',()=>this.ir('jogo'));
+    on('addItemBtn','click',()=>this._addItemVenda());
+    on('confirmarVenda','click',()=>this._confirmarVenda());
+
+    // CONFIG
+    on('addProdBtn','click',()=>{
+      const nome=$('novoProdNome')?.value.trim(); if(!nome)return;
+      const meta=parseInt($('novoProdMeta')?.value)||10;
+      E.adicionarProduto(nome,meta); this.render();
+    });
+    document.querySelectorAll('.mini-input[data-pid]').forEach(inp=>{
+      inp.addEventListener('change',()=>E.editarMeta(parseInt(inp.dataset.pid),inp.value));
+    });
+    on('salvarPerfil','click',()=>{
+      E.usuario.nome=$('cfgNome')?.value.trim()||E.usuario.nome;
+      E.usuario.empresa=$('cfgEmpresa')?.value.trim()||E.usuario.empresa;
+      E.save(); this._toast('✅ Perfil salvo!'); this.render();
+    });
+    on('exportBtn','click',()=>{
+      const blob=new Blob([JSON.stringify({baseDados:E.baseDados,agenda:E.agenda,metas:E.metas},null,2)],{type:'application/json'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='clientes_pro_backup.json'; a.click();
+    });
+    on('resetDadosBtn','click',()=>{
+      if(confirm('Apagará novos cadastros e edições. Continuar?')){ localStorage.removeItem('cp_dados'); location.reload(); }
+    });
+
+    // CADASTRO
+    on('salvarNovoCliente','click',()=>{
+      const fantasia=$('ncFantasia')?.value.trim(); if(!fantasia){this._toast('⚠️ Nome fantasia obrigatório');return;}
+      E.adicionarCliente({
+        fantasia, cliente:$('ncCliente')?.value.trim()||fantasia,
+        telefone:$('ncTelefone')?.value.trim()||'',
+        endereco:$('ncEndereco')?.value.trim()||'',
+        bairro:($('ncBairro')?.value.trim()||'NÃO INFORMADO').toUpperCase(),
+        cidade:$('ncCidade')?.value||'',
+        limite:parseFloat($('ncLimite')?.value)||0,
+        obs:$('ncObs')?.value.trim()||'', ativo:'ATIVO'
+      });
+      this._toast('✅ Cliente salvo!'); this.ir('lista');
+    });
+  },
+
+  // ── EXPAND JCARD ──
+  _toggleExpand(id) {
+    const el = document.getElementById('jcexp_'+id);
+    if(!el) return;
+    const open = el.style.display==='none';
+    el.style.display = open ? 'block' : 'none';
+    const head = el.previousElementSibling;
+    if(head) {
+      const hint = head.querySelector('span[style*="ver mais"], span[style*="fechar"]');
+      if(hint) hint.textContent = open ? '▲ fechar' : '▼ ver mais';
+    }
+  },
+
+  // ── VENDA ──
+  _addItemVenda() {
+    const el=document.getElementById('vendaItens'); if(!el)return;
+    const div=document.createElement('div'); div.className='venda-item';
+    div.innerHTML=`
+      <div class="sel-wrap" style="flex:2"><select class="asel vi-prod">
+        <option value="">Produto...</option>
+        ${E.metas.produtos.map(p=>`<option value="${this.esc(p.nome)}">${this.esc(p.nome)}</option>`).join('')}
+      </select></div>
+      <input class="mini-input vi-qtd" type="number" value="1" min="1">
+      <input class="mini-input vi-val" type="number" value="0" min="0" step="0.01" placeholder="R$">
+      <button class="del-btn vi-del">🗑️</button>`;
+    div.querySelector('.vi-del').addEventListener('click',()=>{ div.remove(); this._calcTotal(); });
+    div.querySelectorAll('input,select').forEach(i=>i.addEventListener('input',()=>this._calcTotal()));
+    el.appendChild(div);
+  },
+  _calcTotal() {
+    let t=0;
+    document.querySelectorAll('.venda-item').forEach(d=>{
+      t+=(parseFloat(d.querySelector('.vi-qtd')?.value)||0)*(parseFloat(d.querySelector('.vi-val')?.value)||0);
+    });
+    const el=document.getElementById('vendaTotal'); if(el) el.textContent='R$ '+t.toLocaleString('pt-BR',{minimumFractionDigits:2});
+  },
+  _confirmarVenda() {
+    const {clienteId}=this._params; let ok=false;
+    document.querySelectorAll('.venda-item').forEach(d=>{
+      const prod=d.querySelector('.vi-prod')?.value, qtd=parseFloat(d.querySelector('.vi-qtd')?.value)||0, val=parseFloat(d.querySelector('.vi-val')?.value)||0;
+      if(prod&&qtd>0){ E.registrarVenda(clienteId,prod,qtd,val); ok=true; }
+    });
+    if(!ok){this._toast('⚠️ Adicione pelo menos um produto');return;}
+    this._toast('✅ Venda registrada!'); this.ir('jogo');
+  },
+
+  // ── MODAIS ──
+  _modalAgendar(clienteId, onConfirm) {
+    const hoje=new Date().toISOString().split('T')[0];
+    this._showModal(`<div class="modal">
+      <div class="modal-title">📅 Agendar Retorno</div>
+      <div class="form-group"><label class="form-label">Data</label>
+        <input class="asel" id="agData" type="date" value="${hoje}" min="${hoje}" style="padding:9px 12px"></div>
+      <div class="form-group"><label class="form-label">Observação</label>
+        <input class="asel" id="agObs" placeholder="Ex: Visitar pela manhã" style="padding:9px 12px"></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn-secondary" id="agCancel" style="flex:1">Cancelar</button>
+        <button class="btn-primary" id="agConfirm" style="flex:2">Agendar</button>
+      </div>
+    </div>`);
+    document.getElementById('agCancel')?.addEventListener('click',()=>this._closeModal());
+    document.getElementById('agConfirm')?.addEventListener('click',()=>{
+      const d=document.getElementById('agData')?.value, o=document.getElementById('agObs')?.value;
+      if(!d)return;
+      if(onConfirm) onConfirm(d,o);
+      else E.agendarRetorno(clienteId,d,o);
+      this._closeModal(); this._toast('✅ Agendado!');
+    });
+  },
+  _modalAgendarRota(clienteId) {
+    this._modalAgendar(clienteId,(d,o)=>{ E.agendarEmRota(clienteId,d,o); this.render(); });
+  },
+  _showModal(html) {
+    let ov=document.getElementById('modalOverlay');
+    if(!ov){ ov=document.createElement('div'); ov.id='modalOverlay'; ov.className='modal-overlay'; document.body.appendChild(ov); }
+    ov.innerHTML=html; ov.style.display='flex';
+  },
+  _closeModal() { const ov=document.getElementById('modalOverlay'); if(ov) ov.style.display='none'; },
+
+  // ── COPIAR ──
+  _copiarCard(idx) {
+    const r=window.__filtered?.[idx]; if(!r)return;
+    const txt=['📋 '+(r.fantasia||r.cliente),'🏢 '+r.cliente,'📍 '+r.bairro,'🏙️ '+r.cidade,r.endereco?'🗺️ '+r.endereco:'',r.telefone?'📞 '+r.telefone:'','💰 '+this.fmtR(r.limite),'Status: '+r.ativo].filter(Boolean).join('\n');
+    if(navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>this._toast('✅ Copiado!'));
+    else { const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);this._toast('✅ Copiado!'); }
+  },
+
+  // ── TOAST ──
+  _toast(msg) {
+    const t=document.getElementById('toast'); if(!t)return;
+    t.textContent=msg; t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),2200);
+  },
+
+  // ── FILE UPLOAD ──
+  _handleFile(file) {
+    if(!file)return;
+    if(typeof XLSX==='undefined'){this._toast('⏳ Aguarde…');return;}
+    const reader=new FileReader();
+    reader.onload=e=>{
+      try {
+        const wb=XLSX.read(e.target.result,{type:'array'});
+        const ws=wb.Sheets[wb.SheetNames[0]];
+        const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+        E.processarPlanilhaBruta(rows);
+        this._filtros={q:'',status:'all',cidade:'',bairro:'',limMin:0,sort:''};
+        this._toast('✅ '+E.baseDados.length+' clientes carregados!');
+        this.render();
+      } catch(err){this._toast('❌ Erro ao ler arquivo');console.error(err);}
+    };
+    reader.readAsArrayBuffer(file);
+  },
+
+  // ── TEMA ──
+  _setColor(c,el){ document.documentElement.dataset.color=c; document.querySelectorAll('.cdot').forEach(d=>d.classList.toggle('sel',d.dataset.c===c)); localStorage.setItem('cp_color',c); },
+  _toggleDark(){ const n=document.documentElement.dataset.theme==='dark'?'light':'dark'; document.documentElement.dataset.theme=n; localStorage.setItem('cp_theme',n); const l=document.getElementById('themeLabel'); if(l)l.textContent=n==='dark'?'🌙 Modo escuro':'☀️ Modo claro'; },
+
+  // ── NAV ──
+  _updateNav() {
+    document.querySelectorAll('.nav-btn[data-tela]').forEach(b=>b.classList.toggle('active',b.dataset.tela===this.tela||(this.tela==='jogo_visita'&&b.dataset.tela==='jogo')));
+    const ab=document.getElementById('agendaBadge'); if(ab){const n=E.agenda.filter(a=>!a.concluido).length; ab.textContent=n; ab.style.display=n>0?'inline':'none';}
+    const jb=document.getElementById('jogoBadge'); if(jb) jb.style.display=E.jogo.emAndamento?'inline':'none';
+  }
+};
+
+
+(function() {
+  const t = localStorage.getItem('cp_theme');
+  const c = localStorage.getItem('cp_color');
+  if (t) document.documentElement.dataset.theme = t;
+  if (c) document.documentElement.dataset.color = c;
+  E.carregarBase();
+  UI.ir('lista');
+  setTimeout(() => UI.checkarPerfil(), 400);
+})();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
